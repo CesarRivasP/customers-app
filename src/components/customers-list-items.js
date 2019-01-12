@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const CustomerListItems = ({name, editAction, deleteAction, urlPath}) => {
+const CustomersListItems = ({name, editAction, deleteAction, urlPath}) => {
   return (
     <div>
       <div className="customer-list-items">
@@ -20,11 +20,11 @@ const CustomerListItems = ({name, editAction, deleteAction, urlPath}) => {
   );
 }
 
-CustomerListItems.propTypes = {
+CustomersListItems.propTypes = {
   name: Proptypes.string.isRequired,
   editAction: Proptypes.string.isRequired,
   deleteAction: Proptypes.string.isRequired,
   urlPath: PropTypes.string.isRequired,
 };
 
-export default CustomerListItems;
+export default CustomersListItems;
