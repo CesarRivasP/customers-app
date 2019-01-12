@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const CustomerListItems = ({name, editAction, deleteAction}) => {
+const CustomerListItems = ({name, editAction, deleteAction, urlPath}) => {
   return (
     <div>
       <div className="customer-list-items">
         <div className="field">
-          <Link to={`${props.urlPath}${dni}`}>{name}</Link>
+          <Link to={`${urlPath}${dni}`}>{name}</Link>
         </div>
         <div className="field">
-          <Link to={`${props.urlPath}${dni}/edit`}>{editAction}</Link>
+          <Link to={`${urlPath}${dni}/edit`}>{editAction}</Link>
         </div>
         <div className="field">
-          <Link to={`${props.urlPath}${dni}/delete`}>{deleteAction}</Link>
+          <Link to={`${urlPath}${dni}/delete`}>{deleteAction}</Link>
         </div>
       </div>
     </div>
