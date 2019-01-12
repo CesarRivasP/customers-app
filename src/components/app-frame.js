@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import AppHeader from './app-header'
 
 const AppFrame = ({header, body}) => {
   return (
