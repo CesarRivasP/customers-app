@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const CustomersActions = ({children}) => {
+const CustomerActions = ({children}) => {
   return (
     <div>
       <div className="customers-actions">
@@ -13,12 +13,12 @@ const CustomersActions = ({children}) => {
   );
 }
 
-CustomersActions.proptypes = {
+CustomerActions.proptypes = {
   //Del tipo 'nodo' involucra todo tipo de elemento renderizable que react nos permita.
   children: PropTypes.node.isRequired,
 };
 
-export default CustomersActions;
+export default CustomerActions;
 
 /*
 La propiedad children hace referencia a todo el contenido dentro de un elemento (componente)
