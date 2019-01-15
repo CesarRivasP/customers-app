@@ -26,7 +26,9 @@ class HomeContainer extends Component {
             <div>
               Esta es la pantalla inicial
               <CustomerActions>
-                <button onClick={this.handleOnClick}></button>
+                <button onClick={this.handleOnClick}>
+                  Listado de clientes
+                </button>
                 {/* <Link to="/customers">Listado de clientes</Link> */}
               </CustomerActions>
             </div>
