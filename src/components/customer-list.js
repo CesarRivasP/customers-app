@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CustomersListItem from './customersListItems'
+import { Link } from 'react-router-dom';
+import CustomersListItem from './customer-list-items'
 import '../index.css';
 
 const CustomersList = ({customers, urlPath}) => {
@@ -8,15 +9,16 @@ const CustomersList = ({customers, urlPath}) => {
     <div>
       <div className="customers-list">
         {
-          customers.map(customer => {
+          customers.map(customer => (
             <CustomersListItem
               key={customer.ci}
               name={customer.name}
+              ci={customer.ci}
               editAction={'Editar'}
               deleteAction={'Eliminar'}
               urlPath={urlPath}>
             </CustomersListItem>
-          })
+          ))
         }
       </div>
     </div>
