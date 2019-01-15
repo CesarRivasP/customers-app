@@ -20,8 +20,15 @@ body {
 }
 
 .customers-actions button {
-  background: white;
+  color: black;
   min-width: 100px;
   height: 30px;
   margin: 5px;
+}
+
+.customers-list-item .field {
+  background: #EEE;
+  width: 160px;
+  margin: 5px;
+  display: inline-block;
 }
