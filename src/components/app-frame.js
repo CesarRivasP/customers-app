@@ -7,10 +7,10 @@ const AppFrame = ({header, body}) => {
   return (
     <div>
       <div className="app-frame">
-        <AppHeader title={header} />
+        <AppHeader title={ header } />
       </div>
       <div /*className="body"*/>
-        {body}
+        { body }
       </div>
       <div /*className="footer"*/>
         Aplicacion Simple de ejemplo
