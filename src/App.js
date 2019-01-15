@@ -9,9 +9,9 @@ import './App.css';
 
 class App extends Component {
 
-  renderHome = () => <h1>Home</h1>
+  // renderHome = () => <h1>Home</h1>
 
-  renderCustomerContainer = () => <h1>Customer Container</h1>
+  // renderCustomerContainer = () => <h1>Customer Container</h1>
 
   renderCustomerListContainer = () => <h1>Customer List Container</h1>
 
