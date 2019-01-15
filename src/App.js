@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomeContainer from './containers/home-container';
+import CustomersContainer from './containers/customers-container';
 import logo from './logo.svg';
 import './App.css';
 
@@ -62,8 +63,8 @@ class App extends Component {
               <Route exact path="/" component={ this.renderHome } />
           </Switch> */}
 
-            <Route exact path="/" component={HomeContainer} />
-            <Route exact path="/customers" component={ this.renderCustomerContainer } />
+            <Route exact path="/" component={ HomeContainer } />
+            <Route exact path="/customers" component={ CustomersContainer } />
             <Switch>
               <Route path="/customers/new" component={ this.renderCustomerNewContainer } />
               <Route path="/customers/:ci" component={ this.renderCustomerListContainer } />
