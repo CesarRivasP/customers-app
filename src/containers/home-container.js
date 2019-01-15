@@ -7,22 +7,28 @@ import CustomerActions from '../components/customers-actions';
 
 
 class HomeContainer extends Component {
-
+  handleOnClick = () => {
+    console.log("handle on click");
+    // <Link to="/customers">Listado de clientes</Link>
+  }
   render () {
     return (
       <div>
         {/* <h1>Home</h1>
         <Link to="/customers">Listado de clientes</Link> */}
         {/* Otra manera de hacer esta parte, mediante el app-frame */}
-        <AppFrame header="Home" body={
-          // acciones disponibles
-          <div>
-            Esta es la pantalla inicial
-            <CustomerActions>
-              <Link to="/customers">Listado de clientes</Link>
-            </CustomerActions>
-          </div>
-        }/>
+        <AppFrame
+          header="Home"
+          body={  // acciones disponibles
+            <div>
+              Esta es la pantalla inicial
+              <CustomerActions>
+                <button onClick={this.handleOnClick}></button>
+                {/* <Link to="/customers">Listado de clientes</Link> */}
+              </CustomerActions>
+            </div>
+          }
+        />
       </div>
     );
   }
