@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import AppFrame from '../components/app-frame';
 import CustomerList from '../components/customer-list';
 import CustomerActions from '../components/customers-actions';
@@ -29,6 +30,9 @@ const customers = [
 
 class CustomersContainer extends Component {
 
+  handleAddNew = () => {
+    this.props.history.push('customers/new');
+  }
 
   renderBody = (customers) => (
     <div>
@@ -57,7 +61,7 @@ class CustomersContainer extends Component {
 //   urlPath: PropTypes.string.isRequired,
 // }
 
-export default CustomersContainer;
+export default withRouter(CustomersContainer);
 
 /*
 El app-frame es para hacer mas estandar la parte visual
