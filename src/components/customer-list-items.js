@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import '../index.css';
 
-const CustomerListItems = ({name, editAction, deleteAction, urlPath}) => {
+const CustomerListItems = ({name, ci, editAction, deleteAction, urlPath,}) => {
   return (
     <div>
-      <div className="customer-list-items">
+      <div className="customers-list-item">
         <div className="field">
           <Link to={`${urlPath}${ci}`}>{name}</Link>
         </div>
@@ -21,9 +22,10 @@ const CustomerListItems = ({name, editAction, deleteAction, urlPath}) => {
 }
 
 CustomerListItems.propTypes = {
-  name: Proptypes.string.isRequired,
-  editAction: Proptypes.string.isRequired,
-  deleteAction: Proptypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  ci: PropTypes.number.isRequired,
+  editAction: PropTypes.string.isRequired,
+  deleteAction: PropTypes.string.isRequired,
   urlPath: PropTypes.string.isRequired,
 };
 
