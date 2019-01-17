@@ -69,11 +69,17 @@ CustomersContainer.propTypes = {
   fetchCustomers: PropTypes.func.isRequired,
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchCustomers: () => dispatch(fetchCustomers())
-})
+// const mapDispatchToProps = (dispatch) => ({
+//   fetchCustomers: () => dispatch(fetchCustomers())
+// });
 
-export default withRouter(connect(null, mapDispatchToProps)(CustomersContainer));
+//forma simplificada
+// const mapDispatchToProps = { fetchCustomers };
+
+// export default withRouter(connect(null, mapDispatchToProps)(CustomersContainer));
+
+// Mas simplificado aun
+export default withRouter(connect(null, { fetchCustomers })(CustomersContainer));
 
 /*
 El app-frame es para hacer mas estandar la parte visual
