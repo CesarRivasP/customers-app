@@ -26,5 +26,9 @@ const customers = [
   }
 ];
 
-export const fetchCustomers = createAction(FETCH_CUSTOMERS);
+// export const fetchCustomers = createAction(FETCH_CUSTOMERS);
 //Como el payload es null, no se le pasa
+                                                  //type, payloadCreator
+export const fetchCustomers = createAction(FETCH_CUSTOMERS, () => customers); //la funcion no recibe parametros
+//porque en la invocacion de la accion en el componentDidMount tampoc se le pasan parametros
+// el retorno de customers es el retorno del payloadCreator
