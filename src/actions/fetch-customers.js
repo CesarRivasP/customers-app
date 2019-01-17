@@ -1,8 +1,6 @@
+import { createAction } from 'redux-actions';
+import { FETCH_CUSTOMERS } from '../constants';
 
 
-export const fetchCustomers = () => {
-  debugger;
-  return {
-    type: 'FETCH_CUSTOMERS', payload: null
-  }
-}
+export const fetchCustomers = createAction(FETCH_CUSTOMERS);
+//Como el payload es null, no se le pasa
