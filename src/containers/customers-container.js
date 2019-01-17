@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import AppFrame from '../components/app-frame';
 import CustomerList from '../components/customer-list';
 import CustomerActions from '../components/customers-actions';
+import { fetchCustomers } from '../actions/fetch-customers';
+
 
 const customers = [
   {
@@ -29,6 +32,10 @@ const customers = [
 ];
 
 class CustomersContainer extends Component {
+
+  componentDidMount() {
+    this.props.fetchCustomers();
+  }
 
   handleAddNew = () => {
     this.props.history.push('customers/new');
@@ -56,12 +63,17 @@ class CustomersContainer extends Component {
   }
 }
 
-// CustomersContainer.propTypes = {
-//   customers: PropTypes.string.isRequired,
-//   urlPath: PropTypes.string.isRequired,
-// }
+CustomersContainer.propTypes = {
+  // customers: PropTypes.string.isRequired,
+  // urlPath: PropTypes.string.isRequired,
+  fetchCustomers: PropTypes.func.isRequired,
+}
 
-export default withRouter(CustomersContainer);
+const mapDispatchToProps = (dispatch) => ({
+  fetchCustomers: () => dispatch(fetchCustomers())
+})
+
+export default withRouter(connect(null, mapDispatchToProps)(CustomersContainer));
 
 /*
 El app-frame es para hacer mas estandar la parte visual
