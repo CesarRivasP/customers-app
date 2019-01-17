@@ -8,28 +8,28 @@ import CustomerActions from '../components/customers-actions';
 import { fetchCustomers } from '../actions/fetch-customers';
 
 
-const customers = [
-  {
-    "ci": "5606048",
-    "name": "Pedro Rivas",
-    "age": 58
-  },
-  {
-    "ci": "4432815",
-    "name": "Maria Perez Bello",
-    "age": 62
-  },
-  {
-    "ci": "24205310",
-    "name": "Cesar Rivas",
-    "age": 23
-  },
-  {
-    "ci": "19194710",
-    "name": "Andres Rivas",
-    "age": 29
-  }
-];
+// const customers = [
+//   {
+//     "ci": "5606048",
+//     "name": "Pedro Rivas",
+//     "age": 58
+//   },
+//   {
+//     "ci": "4432815",
+//     "name": "Maria Perez Bello",
+//     "age": 62
+//   },
+//   {
+//     "ci": "24205310",
+//     "name": "Cesar Rivas",
+//     "age": 23
+//   },
+//   {
+//     "ci": "19194710",
+//     "name": "Andres Rivas",
+//     "age": 29
+//   }
+// ];
 
 class CustomersContainer extends Component {
 
@@ -52,6 +52,7 @@ class CustomersContainer extends Component {
 
 
   render () {
+    const { customers } = this.props;
     return (
       <div>
         <AppFrame
@@ -67,7 +68,33 @@ CustomersContainer.propTypes = {
   // customers: PropTypes.string.isRequired,
   // urlPath: PropTypes.string.isRequired,
   fetchCustomers: PropTypes.func.isRequired,
+  customers: PropTypes.array.isRequired,
 }
+
+//Declaracion de propiedad por defecto: nombre del componente.defaultProps
+CustomersContainer.defaultProps = {
+  customers: []
+    // {
+    //   "ci": "5606048",
+    //   "name": "Pedro Rivas",
+    //   "age": 58
+    // },
+    // {
+    //   "ci": "4432815",
+    //   "name": "Maria Perez Bello",
+    //   "age": 62
+    // },
+    // {
+    //   "ci": "24205310",
+    //   "name": "Cesar Rivas",
+    //   "age": 23
+    // },
+    // {
+    //   "ci": "19194710",
+    //   "name": "Andres Rivas",
+    //   "age": 29
+    // }
+};
 
 // const mapDispatchToProps = (dispatch) => ({
 //   fetchCustomers: () => dispatch(fetchCustomers())
