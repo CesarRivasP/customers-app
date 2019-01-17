@@ -6,7 +6,7 @@ import AppFrame from '../components/app-frame';
 import CustomerList from '../components/customer-list';
 import CustomerActions from '../components/customers-actions';
 import { fetchCustomers } from '../actions/fetch-customers';
-
+import { getCustomers } from '../selectors/customers';
 
 // const customers = [
 //   {
@@ -106,7 +106,8 @@ CustomersContainer.defaultProps = {
 // export default withRouter(connect(null, mapDispatchToProps)(CustomersContainer));
 
 const mapStateToProps = (state) => ({
-  customers: state.customers
+  // customers: state.customers
+  customers: getCustomers(state),
 })
 
 // Mas simplificado aun
@@ -115,4 +116,5 @@ export default withRouter(connect(mapStateToProps, { fetchCustomers })(Customers
 /*
 El app-frame es para hacer mas estandar la parte visual
 El urlPath necesita el url base, por base se refiere a la base sobre la cual se va a agregar el edit o el new
+- Se va a aplicar el patron selector para que el container desconozca la estructura del state
 */
