@@ -105,8 +105,12 @@ CustomersContainer.defaultProps = {
 
 // export default withRouter(connect(null, mapDispatchToProps)(CustomersContainer));
 
+const mapStateToProps = (state) => ({
+  customers: state.customers
+})
+
 // Mas simplificado aun
-export default withRouter(connect(null, { fetchCustomers })(CustomersContainer));
+export default withRouter(connect(mapStateToProps, { fetchCustomers })(CustomersContainer));
 
 /*
 El app-frame es para hacer mas estandar la parte visual
