@@ -1,0 +1,41 @@
+{
+  "customers": [
+    {
+      "ci": "7546685",
+      "name": "Pedro Rivas",
+      "age": 58
+    },
+    {
+      "ci": "6855332",
+      "name": "Maria Perez Bello",
+      "age": 62
+    },
+    {
+      "ci": "45445665",
+      "name": "Cesar Rivas",
+      "age": 23
+    },
+    {
+      "ci": "43454456",
+      "name": "Andres Rivas",
+      "age": 29
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
