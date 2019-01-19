@@ -6,21 +6,19 @@ import '../index.css';
 
 const CustomersList = ({customers, urlPath}) => {
   return (
-    <div>
-      <div className="customers-list">
-        {
-          customers.map(customer => (
-            <CustomersListItem
-              key={customer.ci}
-              name={customer.name}
-              ci={customer.ci}
-              editAction={'Editar'}
-              deleteAction={'Eliminar'}
-              urlPath={urlPath}>
-            </CustomersListItem>
-          ))
-        }
-      </div>
+    <div className="customers-list">
+      {
+        customers.map(customer => (
+          <CustomersListItem
+            key={customer.ci}
+            name={customer.name}
+            ci={customer.ci}
+            editAction={'Editar'}
+            deleteAction={'Eliminar'}
+            urlPath={urlPath}>
+          </CustomersListItem>
+        ))
+      }
     </div>
   );
 }
