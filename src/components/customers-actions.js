@@ -9,7 +9,6 @@ const CustomerActions = ({children}) => {
       <div className="customers-actions">
         <div>{children}</div>
       </div>
-
     </div>
   );
 }
