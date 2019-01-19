@@ -8,12 +8,12 @@ const AppFrame = ({header, body}) => {
     <div>
       <div className="app-frame">
         <AppHeader title={ header } />
-      </div>
-      <div /*className="body"*/>
-        { body }
-      </div>
-      <div /*className="footer"*/>
-        Aplicacion Simple de ejemplo
+        <div /*className="body"*/>
+          { body }
+        </div>
+        <div /*className="footer"*/>
+          Aplicacion Simple de ejemplo
+        </div>
       </div>
     </div>
   );
