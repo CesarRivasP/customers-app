@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions';
 import { FETCH_CUSTOMERS } from '../constants';
-
+import { apiGet } from '../api';
+import { urlCustomers } from '../api/urls';
 
 // const customers = [
 //   {
@@ -35,11 +36,4 @@ import { FETCH_CUSTOMERS } from '../constants';
 // el retorno de customers es el retorno del payloadCreator
 
 //after
-const url = 'http://localhost:3001/customers';
-
-const apiFetchCustomers = () => (
-  fetch(url)
-    .then(v => v.json())
-)
-
-export const fetchCustomers = createAction(FETCH_CUSTOMERS, apiFetchCustomers);
+export const fetchCustomers = createAction(FETCH_CUSTOMERS, apiGet(urlCustomers));
