@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomeContainer from './containers/home-container';
 import CustomersContainer from './containers/customers-container';
-import logo from './logo.svg';
+import CustomerContainer from './containers/customer-container';
 import './App.css';
 
 
@@ -15,7 +15,7 @@ class App extends Component {
 
   renderCustomerListContainer = () => <h1>Customer List Container</h1>
 
-  renderCustomerNewContainer = () => <h1>Customer New Container</h1>
+  // renderCustomerNewContainer = () => <h1>Customer New Container</h1>
 
   render() {
     return (
@@ -30,7 +30,7 @@ class App extends Component {
             { this.renderCustomerListContainer() }
             { this.renderCustomerNewContainer() }
         */}
-        <div>
+        {/* <div> */}
           {/*
             Before<Route exact path="/" component={ this.renderHome } />
           <Route exact path="/customers" component={ this.renderCustomerContainer } /> */}
@@ -62,14 +62,13 @@ class App extends Component {
               <Route exact path="/customers" component={ this.renderCustomerContainer } />
               <Route exact path="/" component={ this.renderHome } />
           </Switch> */}
-
-            <Route exact path="/" component={ HomeContainer } />
-            <Route exact path="/customers" component={ CustomersContainer } />
-            <Switch>
-              <Route path="/customers/new" component={ this.renderCustomerNewContainer } />
-              <Route path="/customers/:ci" component={ this.renderCustomerListContainer } />
-            </Switch>
-
+        <div>
+          <Route exact path="/" component={ HomeContainer } />
+          <Route exact path="/customers" component={ CustomersContainer } />
+          <Switch>
+            <Route path="/customers/new" component={ this.renderCustomerNewContainer } />
+            <Route path="/customers/:ci" component={ CustomerContainer } />
+          </Switch>
         </div>
       </Router>
     );
