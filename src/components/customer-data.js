@@ -7,9 +7,9 @@ const CustomerData = ({name, ci, age}) => {
     <div>
       <div className="customer-data">
         <h2>Datos del cliente</h2>
-        <div><strong>Nombre</strong><i>{name}</i></div>
-        <div><strong>C.I</strong><i>{ci}</i></div>
-        <div><strong>Edad</strong><i>{age}</i></div>
+        <div><strong>Nombre: </strong><i>{name}</i></div>
+        <div><strong>C.I: </strong><i>{ci}</i></div>
+        <div><strong>Edad: </strong><i>{age}</i></div>
       </div>
     </div>
   );
@@ -17,7 +17,7 @@ const CustomerData = ({name, ci, age}) => {
 
 CustomerData.proptypes = {
   name: PropTypes.string.isRequired,
-  ci: PropTypes.number.isRequired,
+  ci: PropTypes.string.isRequired,
   age: PropTypes.number,  //opcional
 }
 
