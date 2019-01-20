@@ -38,18 +38,19 @@ class CustomersContainer extends Component {
   }
 
   handleAddNew = () => {
-    this.props.history.push('customers/new');
+    this.props.history.push('/customers/new');
   }
 
   renderBody = (customers) => (
     <div>
-      <CustomerList customers={customers} urlPath={'customer/'} />
+      <CustomerList
+        customers={customers}
+        urlPath={'customers/'} />
       <CustomerActions>
         <button onClick={this.handleAddNew}>Nuevo Cliente</button>
       </CustomerActions>
     </div>
   );
-
 
   render () {
     const { customers } = this.props;
@@ -65,15 +66,13 @@ class CustomersContainer extends Component {
 }
 
 CustomersContainer.propTypes = {
-  // customers: PropTypes.string.isRequired,
-  // urlPath: PropTypes.string.isRequired,
   fetchCustomers: PropTypes.func.isRequired,
   customers: PropTypes.array.isRequired,
 }
 
 //Declaracion de propiedad por defecto: nombre del componente.defaultProps
 CustomersContainer.defaultProps = {
-  customers: []
+  customers: [ ]
     // {
     //   "ci": "5606048",
     //   "name": "Pedro Rivas",
