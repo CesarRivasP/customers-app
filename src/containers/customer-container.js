@@ -12,7 +12,9 @@ class CustomerContainer extends Component {
       <div>
         <AppFrame
           header={`Cliente ${ci}`}
-          body={<p>Datos del cliente</p>}
+          body={
+            <p>Datos del cliente: {this.props.customer.name}</p>
+          }
         />
       </div>
     );
@@ -21,7 +23,16 @@ class CustomerContainer extends Component {
 
 CustomerContainer.propTypes = {
   ci: PropTypes.string.isRequired,
-  // customer: PropTypes.object,
+  customer: PropTypes.object.isRequired,
 }
 
-export default withRouter(connect(null, null)(CustomerContainer));
+const mapStateToProps = (state, props) => ({
+  customer: state.customers.find((client) => client.ci === props.ci)
+})
+
+export default withRouter(connect(mapStateToProps, null)(CustomerContainer));
+
+/*
+- Usualmente mapStateToProps recibe el state. Tambien puede recibir con props de manera que
+mediante la propiedad ci de estas props se pueda hacer un filtrado sobre el state y obtener Los
+datos del cliente */
