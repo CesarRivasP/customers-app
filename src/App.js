@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import HomeContainer from './containers/home-container';
 import CustomersContainer from './containers/customers-container';
-import CustomerContainer from './containers/customer-container';
+import CustomerContainer from './containers/customer-container.js';
 import './App.css';
 
 
@@ -62,12 +62,29 @@ class App extends Component {
               <Route exact path="/customers" component={ this.renderCustomerContainer } />
               <Route exact path="/" component={ this.renderHome } />
           </Switch> */}
-        <div>
+        {/* <div>
           <Route exact path="/" component={ HomeContainer } />
           <Route exact path="/customers" component={ CustomersContainer } />
           <Switch>
             <Route path="/customers/new" component={ this.renderCustomerNewContainer } />
             <Route path="/customers/:ci" component={ CustomerContainer } />
+          </Switch>
+        </div> */}
+        <div>
+          <Switch>
+            <Route exact path="/" component={HomeContainer} />
+            <Route exact path="/customers" component={CustomersContainer} />
+            {/* <Route path="/customers/:ci" component={CustomerContainer} /> */}
+            <Route
+              path="/customers/:ci"
+              render={(props) =>
+                <CustomerContainer
+                  // { ...props }
+                  ci={props.match.params.ci} // de estas propiedades, obtener el ci
+
+                />
+              }
+            />
           </Switch>
         </div>
       </Router>
@@ -77,4 +94,11 @@ class App extends Component {
 
 export default App;
 
-/* Al envolver la app con router se le otorga la capacidad de manejo de rutas */
+/* Al envolver la app con router se le otorga la capacidad de manejo de rutas
+- Para desacoplar el component de la route para que no tenga que acceder mediante la cmobinatoria de
+props.match.params.ci, puesto que de esta manera si estaria aceptando el componente que conozca a la
+estructura de datos, que sepa que datos se le estan inyectando a la ruta.
+Asi que se va a usar la funcion render, que es otra variante.
+- Pasar todas las propiedades que vengan -> { ...props }
+- El nombre del wildcar es equivalente al valor que nos encontramos en  props.match.params.{nombre del wildcar}
+*/
