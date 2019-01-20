@@ -72,7 +72,7 @@ CustomersContainer.propTypes = {
 
 //Declaracion de propiedad por defecto: nombre del componente.defaultProps
 CustomersContainer.defaultProps = {
-  customers: [ ]
+  customers: []
     // {
     //   "ci": "5606048",
     //   "name": "Pedro Rivas",
