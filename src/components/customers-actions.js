@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../index.css';
+// import '../index.css';
 
 
-const CustomerActions = ({children}) => {
+const CustomerActions = ({ children }) => {
   return (
     <div>
       <div className="customers-actions">
