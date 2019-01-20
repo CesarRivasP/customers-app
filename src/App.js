@@ -79,9 +79,7 @@ class App extends Component {
               path="/customers/:ci"
               render={(props) =>
                 <CustomerContainer
-                  // { ...props }
                   ci={props.match.params.ci} // de estas propiedades, obtener el ci
-
                 />
               }
             />
