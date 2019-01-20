@@ -1,4 +1,4 @@
-import { handleAction, handleActions } from 'redux-actions';
+import { /*handleAction,*/ handleActions } from 'redux-actions';
 import { FETCH_CUSTOMERS } from '../constants';
 
 // with handleAction
