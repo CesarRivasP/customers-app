@@ -7,11 +7,11 @@ import AppFrame from '../components/app-frame';
 
 class CustomerContainer extends Component {
   render () {
-    const { match } = this.props;
+    const { ci } = this.props;
     return (
       <div>
         <AppFrame
-          header={'Cliente'}
+          header={`Cliente ${ci}`}
           body={<p>Datos del cliente</p>}
         />
       </div>
