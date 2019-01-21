@@ -72,13 +72,17 @@ class App extends Component {
         </div> */}
         <div>
           <Switch>
-            <Route exact path="/" component={HomeContainer} />
+            <Route exact path="/home" component={HomeContainer} />
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
             <Route exact path="/customers" component={CustomersContainer} />
             {/* <Route path="/customers/:ci" component={CustomerContainer} /> */}
             <Route
               path="/customers/:ci"
               render={(props) =>
                 <CustomerContainer
+                  // {...props}
                   ci={props.match.params.ci} // de estas propiedades, obtener el ci
                 />
               }
