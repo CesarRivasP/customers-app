@@ -2,11 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 import AppFrame from '../components/app-frame';
 import { getCustomerById } from '../selectors/customers';
 
 
 class CustomerContainer extends Component {
+
+  renderBody = () => (
+    // se indica ante que path se quiere reaccionar
+    <Route
+      path="/customers/:ci/edit"
+      children={({ match }) => (
+      //Si encuentra la url, match viene en true, si no en false
+        match ? <p>Es edicion</p> : <p>No es edicion</p>
+      )}
+      //el valor que ofrece match es un true o false, si se corresponde con la path o no
+    />
+  )
+
   render () {
     const { ci } = this.props;
     return (
@@ -14,8 +28,8 @@ class CustomerContainer extends Component {
         <AppFrame
           header={`Cliente ${ci}`}
           body={
-            <p>Datos del cliente: {this.props.customer.name}</p>
-          }
+            // <p>Datos del cliente: {this.props.customer.name}</p>
+            this.renderBody() }
         />
       </div>
     );
