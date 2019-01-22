@@ -15,19 +15,24 @@ class CustomerContainer extends Component {
     // se indica ante que path se quiere reaccionar
     <Route
       path="/customers/:ci/edit"
-      children={({ match }) => (
+      children={({ match }) => {
       //Si encuentra la url, match viene en true, si no en false
         // match ? <p>Es edicion</p> : <p>No es edicion</p>
-        match ? //el valor que ofrece match es un true o false, si se corresponde con el path o no
-          <CustomerEdit
-            // name={this.props.customer.name}  manera normal de realizar esta tarea
-            //otra manera
-            { ...this.props.customer } // toma la propiedad customer, y aplica destructuring
-            //es decir, toma las propiedades que lleva dentro customer y las individualmente al componente
-          />
-          :
-          <CustomerData { ...this.props.customer} />
-      )}
+        //match ? //el valor que ofrece match es un true o false, si se corresponde con el path o no
+          // <CustomerEdit
+          //   // name={this.props.customer.name}  manera normal de realizar esta tarea
+          //   //otra manera
+          //   { ...this.props.customer } // toma la propiedad customer, y aplica destructuring
+          //   //es decir, toma las propiedades que lleva dentro customer y las individualmente al componente
+          // />
+          // :
+          // <CustomerData { ...this.props.customer} />
+
+          // -- Definicion de controles dinamicamente --
+          // const CustomerControl = CustomerEdit; unciona como un alias
+          const CustomerControl = match ? CustomerEdit : CustomerData;
+          return <CustomerControl { ...this.props.customer} />
+      }}
     />
   )
 
@@ -61,4 +66,8 @@ export default withRouter(connect(mapStateToProps, null)(CustomerContainer));
 /*
 - Usualmente mapStateToProps recibe el state. Tambien puede recibir con props de manera que
 mediante la propiedad ci de estas props se pueda hacer un filtrado sobre el state y obtener Los
-datos del cliente */
+datos del cliente
+- DRY: DONT REPEAT YOURSELF (NO REPETIR)
+- Definicion de controles dinamicamente: en tiempo de ejecucion se puede definir cual es el control de
+lo que se quiere mostrar
+*/
