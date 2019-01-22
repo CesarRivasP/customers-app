@@ -15,4 +15,4 @@ class CustomerNewContainer extends Component {
 //
 // }
 
-export extends CustomerNewContainer;
+export default CustomerNewContainer;
