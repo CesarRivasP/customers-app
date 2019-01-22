@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import AppFrame from '../components/app-frame';
+import CustomerData from '../components/customer-data';
+import CustomerEdit from '../components/customer-edit';
 import { getCustomerById } from '../selectors/customers';
 
 
@@ -15,9 +17,17 @@ class CustomerContainer extends Component {
       path="/customers/:ci/edit"
       children={({ match }) => (
       //Si encuentra la url, match viene en true, si no en false
-        match ? <p>Es edicion</p> : <p>No es edicion</p>
+        // match ? <p>Es edicion</p> : <p>No es edicion</p>
+        match ? //el valor que ofrece match es un true o false, si se corresponde con el path o no
+          <CustomerEdit
+            // name={this.props.customer.name}  manera normal de realizar esta tarea
+            //otra manera
+            { ...this.props.customer } // toma la propiedad customer, y aplica destructuring
+            //es decir, toma las propiedades que lleva dentro customer y las individualmente al componente
+          />
+          :
+          <CustomerData { ...this.props.customer} />
       )}
-      //el valor que ofrece match es un true o false, si se corresponde con la path o no
     />
   )
 
@@ -38,7 +48,7 @@ class CustomerContainer extends Component {
 
 CustomerContainer.propTypes = {
   ci: PropTypes.string.isRequired,
-  customer: PropTypes.object.isRequired,
+  customer: PropTypes.object,
 }
 
 const mapStateToProps = (state, props) => ({
