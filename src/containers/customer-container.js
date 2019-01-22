@@ -31,7 +31,10 @@ class CustomerContainer extends Component {
           // -- Definicion de controles dinamicamente --
           // const CustomerControl = CustomerEdit; unciona como un alias
           const CustomerControl = match ? CustomerEdit : CustomerData;
-          return <CustomerControl { ...this.props.customer} />
+          return <CustomerControl
+            // initialValues={this.props.customer}  para pasar valores iniciales
+            { ...this.props.customer}
+          />
       }}
     />
   )
