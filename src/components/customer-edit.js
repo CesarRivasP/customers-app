@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { reduxForm, Field } from 'redux-form'; //High Order Component
 import '../index.css';
 
 const CustomerEdit = ({ name, ci, age }) => {
@@ -17,4 +18,5 @@ CustomerEdit.propTypes = {
   age: PropTypes.number,
 };
 
-export default CustomerEdit;
+export default reduxForm({ form: 'customer_edit' })(CustomerEdit);
+                      //  nombre de formulario
