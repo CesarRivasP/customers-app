@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form'; //High Order Component
 import { setPropsAsInitial } from '../helpers/set-props-as-initial'; //High Order Component
