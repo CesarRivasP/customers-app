@@ -65,8 +65,7 @@ const CustomerEdit = ({ name, ci, age, handleSubmit, submiting, onBack }) => {
       <form
         // action="" -> action nativa del formulario
         //action que provee redux form
-        onSubmit={handleSubmit}
-      >
+        onSubmit={handleSubmit}>
         {/* <label htmlFor="name">Nombre</label> */}
         <Field
           name="name"
