@@ -1,8 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+import CustomersActions from './customers-actions';
 import '../index.css';
 
-const CustomerData = ({ name, ci, age }) => {
+
+const CustomerData = ({ name, ci, age, onBack }) => {
   return (
     <div>
       <div className="customer-data">
@@ -11,6 +13,9 @@ const CustomerData = ({ name, ci, age }) => {
         <div><strong>C.I: </strong><i>{ci}</i></div>
         <div><strong>Edad: </strong><i>{age}</i></div>
       </div>
+      <CustomersActions>
+        <button onClick={onBack}>Volver</button>
+      </CustomersActions>
     </div>
   );
 }
@@ -19,6 +24,7 @@ CustomerData.proptypes = {
   ci: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   age: PropTypes.number,  //opcional
+  onBack: PropTypes.func.isRequired
 }
 
 export default CustomerData;
