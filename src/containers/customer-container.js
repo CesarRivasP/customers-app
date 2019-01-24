@@ -11,6 +11,12 @@ import { getCustomerById } from '../selectors/customers';
 
 class CustomerContainer extends Component {
 
+  handleSubmit = (values) => {
+    // cada uno de los campos del formulario {name,ci,age}
+    console.log(JSON.stringify(values));
+    console.log(`Sin metodos ${values}`);
+  }
+
   renderBody = () => (
     // se indica ante que path se quiere reaccionar
     <Route
@@ -34,6 +40,7 @@ class CustomerContainer extends Component {
           return <CustomerControl
             // initialValues={this.props.customer}  para pasar valores iniciales
             { ...this.props.customer}
+            onSubmit={this.handleSubmit}  //funcion manejadora del evento
           />
       }}
     />
