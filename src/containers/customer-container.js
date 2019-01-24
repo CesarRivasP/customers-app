@@ -7,9 +7,17 @@ import AppFrame from '../components/app-frame';
 import CustomerData from '../components/customer-data';
 import CustomerEdit from '../components/customer-edit';
 import { getCustomerById } from '../selectors/customers';
+import { fetchCustomers } from '../actions/fetch-customers'
 
 
 class CustomerContainer extends Component {
+
+  componentDidMount(){
+    // Cuando no existe un customer (el state viene vacio) y por lo tanto este queda en null
+    if(!this.props.customer){
+      this.props.fetchCustomers();
+    }
+  }
 
   handleSubmit = (values) => {
     // cada uno de los campos del formulario {name,ci,age}
@@ -70,6 +78,7 @@ class CustomerContainer extends Component {
 CustomerContainer.propTypes = {
   ci: PropTypes.string.isRequired,
   customer: PropTypes.object,
+  fetchCustomers: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, props) => ({
@@ -77,7 +86,7 @@ const mapStateToProps = (state, props) => ({
   customer: getCustomerById(state, props)
 })
 
-export default withRouter(connect(mapStateToProps, null)(CustomerContainer));
+export default withRouter(connect(mapStateToProps, { fetchCustomers })(CustomerContainer));
 
 /*
 - Usualmente mapStateToProps recibe el state. Tambien puede recibir con props de manera que
