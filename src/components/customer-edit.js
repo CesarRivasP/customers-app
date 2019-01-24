@@ -17,6 +17,25 @@ const isNumber = (value) => ( //para asegurar que venga un tipe numerico
   isNaN(Number(value)) && "El campo debe ser un numero"
 );
 
+const validate = (values) => {
+  //espera como retorno los posibles errores, solo que en esta oportunidad los errores van
+  //van a ser representados por un objeto cuyas propiedades van a ser cada uno de los campos que
+  //hayam tenido un error
+  const error = {}; //objeto con los errores de validacion encontrados
+  //si no hay error retorna un objeto vacio
+  //validar que el field name isRequired. values tiene las propiedades, los nombres de los distintos campos
+  if(!values.name ){  //si no viene nada
+    error.name = "El campo nombre es requerido";
+    //asi se genera automáticamente dentro del objeto vacio una clave name con su contenido
+  }
+
+  if(!values.ci){
+    error.ci = "El campo ci es obligatorio"
+  }
+
+  return error;
+};
+
 const myField = ({ input, meta, type, label, name }) => (
   //En input viene toda la informacion del input
   //meta indica cuando hay errores y los distintos estados del campo
@@ -50,16 +69,17 @@ const CustomerEdit = ({ name, ci, age }) => {
 //Hay que generar nuestro propio componente
           component={myField}
           type="text"
-          validate={isRequired} //valicacion
+          // validate={isRequired} //valicacion a nivel de field
+          validate={isNumber}
           label="Nombre"
         />
         <Field
           name="ci" /*component="input"*/
           type="text"
           component={myField}
-          // validate={isRequired}
+          validate={isNumber}
           //Para establecer varias validaciones
-          validate={[isRequired, isNumber]}
+          // validate={[isRequired, isNumber]}
           label="C.I"
         />
         <Field
@@ -92,7 +112,11 @@ CustomerEdit.propTypes = {
 //   (state,props) => ({ initialValues: props }))(reduxForm({ form: 'customer_edit' })(CustomerEdit));
 // mapStateToProps                                           nombre de formulario
 //after
-const CustomerEditForm = reduxForm({ form: 'customer_edit' })(CustomerEdit);
+const CustomerEditForm = reduxForm({
+  form: 'customer_edit',
+  //Validaciones sincronicas globales - Validaciones a nivel global
+  validate  //funcion que va a hacer la validacion
+ })(CustomerEdit);
 // before               (             mapStateToProps               )
 //export default connect((state,props) => ( { initialValues: props }))(CustomerEditForm)
 
@@ -107,4 +131,5 @@ el type se refiere al tipo de contenido que va a esperar
 segunda propiedad que viene en la funcion que es 'props', y se esta estableciendo a initialValues,
 es decir, que se esta transformando la propiedades que vienen al componente en las propiedades que
 se necesitan (name,ci,age)
+- Las validaciones a nivel de field tiene prioridad sobre la validacion global.
 */
