@@ -2,6 +2,7 @@ import React from 'react';
 // import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form'; //High Order Component
+import CustomersActions from './customers-actions';
 import { setPropsAsInitial } from '../helpers/set-props-as-initial'; //High Order Component
 import '../index.css';
 
@@ -55,13 +56,17 @@ const myField = ({ input, meta, type, label, name }) => (
   </div>
 );
 
-const CustomerEdit = ({ name, ci, age }) => {
+const CustomerEdit = ({ name, ci, age, handleSubmit, submiting, onBack }) => {
   return (
     <div>
       <h2>Edicion del cliente</h2>
       {/* <h3>Name: {name}/ C.I: {ci} / Edad: {age}</h3> */}
       {/* form>(div>label+Field)*3  EMMET */}
-      <form action="">
+      <form
+        // action="" -> action nativa del formulario
+        //action que provee redux form
+        onSubmit={handleSubmit}
+      >
         {/* <label htmlFor="name">Nombre</label> */}
         <Field
           name="name"
@@ -70,7 +75,7 @@ const CustomerEdit = ({ name, ci, age }) => {
           component={myField}
           type="text"
           // validate={isRequired} //valicacion a nivel de field
-          validate={isNumber}
+          // validate={isNumber}
           label="Nombre"
         />
         <Field
@@ -80,7 +85,7 @@ const CustomerEdit = ({ name, ci, age }) => {
           validate={isNumber}
           //Para establecer varias validaciones
           // validate={[isRequired, isNumber]}
-          label="C.I"
+          label="C.I"handleSubmit
         />
         <Field
           name="age"
@@ -94,6 +99,15 @@ const CustomerEdit = ({ name, ci, age }) => {
         />
       {/* Como ya hay un div que engloba todo en myField, se pueden borrar los div's que contienen
       a cada Field */}
+      <CustomersActions>
+        <button
+          type="submit" //asi ejecuta la funcion de submit del formulario
+          //validacion en caso que el envio de los datos demore en el servidor, para evitar que el usuario
+          //presione reiteradas veces el boton aceptar mientras envia los datos, se desabilita el button
+          disabled={submiting}  //submiting es una propiedad booleana que provee redux form
+        >Aceptar</button> {/*La accion se va a manejar desde el customer container*/}
+        <button onClick={onBack}>Cancelar</button>
+      </CustomersActions>
       </form>
     </div>
   );
@@ -103,6 +117,7 @@ CustomerEdit.propTypes = {
   name: PropTypes.string,
   ci: PropTypes.string,
   age: PropTypes.number,
+  onBack: PropTypes.func.isRequired
 };
 
 // before
@@ -132,4 +147,6 @@ segunda propiedad que viene en la funcion que es 'props', y se esta estableciend
 es decir, que se esta transformando la propiedades que vienen al componente en las propiedades que
 se necesitan (name,ci,age)
 - Las validaciones a nivel de field tiene prioridad sobre la validacion global.
+- Es importante que la funcion que se le pasa a la accion que provee redux form 'onSubmit' se
+llame 'handleSubmit', ya que handleSubmit es una propiedad funcion que provee redux form
 */
