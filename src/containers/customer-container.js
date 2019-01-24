@@ -17,6 +17,11 @@ class CustomerContainer extends Component {
     console.log(`Sin metodos ${values}`);
   }
 
+  handleOnBack = () => {
+    this.props.history.goBack();  // goBack nos permite desplazarnos hacia atras
+    //similar a ir hacia atras en el navegador
+  };
+
   renderBody = () => (
     // se indica ante que path se quiere reaccionar
     <Route
@@ -41,6 +46,7 @@ class CustomerContainer extends Component {
             // initialValues={this.props.customer}  para pasar valores iniciales
             { ...this.props.customer}
             onSubmit={this.handleSubmit}  //funcion manejadora del evento
+            onBack={this.handleOnBack}
           />
       }}
     />
