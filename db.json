@@ -1,21 +1,25 @@
 {
   "customers": [
     {
+      "id":"30001",
       "ci": "7546685",
       "name": "Pedro Rivas",
       "age": 58
     },
     {
+      "id":"30002",
       "ci": "6855332",
       "name": "Maria Perez Bello",
       "age": 62
     },
     {
+      "id":"30003",
       "ci": "45445665",
       "name": "Cesar Rivas",
       "age": 23
     },
     {
+      "id":"30004",
       "ci": "43454456",
       "name": "Andres Rivas",
       "age": 29
