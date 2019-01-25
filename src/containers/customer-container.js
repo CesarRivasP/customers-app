@@ -7,7 +7,7 @@ import AppFrame from '../components/app-frame';
 import CustomerData from '../components/customer-data';
 import CustomerEdit from '../components/customer-edit';
 import { getCustomerById } from '../selectors/customers';
-import { fetchCustomers } from '../actions/fetch-customers'
+import { fetchCustomers } from '../actions/fetch-customers';
 
 
 class CustomerContainer extends Component {
@@ -49,13 +49,26 @@ class CustomerContainer extends Component {
 
           // -- Definicion de controles dinamicamente --
           // const CustomerControl = CustomerEdit; unciona como un alias
-          const CustomerControl = match ? CustomerEdit : CustomerData;
-          return <CustomerControl
-            // initialValues={this.props.customer}  para pasar valores iniciales
-            { ...this.props.customer}
-            onSubmit={this.handleSubmit}  //funcion manejadora del evento
-            onBack={this.handleOnBack}
-          />
+          //before
+          // const CustomerControl = match ? CustomerEdit : CustomerData;
+          // return <CustomerControl
+          //         // initialValues={this.props.customer}  para pasar valores iniciales
+          //         { ...this.props.customer}
+          //         onSubmit={this.handleSubmit}  //funcion manejadora del evento
+          //         onBack={this.handleOnBack} />
+          //AFTER - 2 forma
+          if(this.props.customer){ //cuando no venga en nulo
+            const CustomerControl = match ? CustomerEdit : CustomerData;
+            return <CustomerControl
+                    {...this.props.customer}
+                    onSubmit={this.handleSubmit}
+                    onBack={this.handleOnBack}
+                  />
+          }
+          return null;
+          // Con esta solucion, se renderiza solamente cuando tiene un cliente.
+          //Como la 1 vez que se genera, no se esta estableciendo, solo se establece el
+          //initial value cuando en efecto hay un customer.
       }}
     />
   )
@@ -95,4 +108,5 @@ datos del cliente
 - DRY: DONT REPEAT YOURSELF (NO REPETIR)
 - Definicion de controles dinamicamente: en tiempo de ejecucion se puede definir cual es el control de
 lo que se quiere mostrar
+- InitialValues solo se inicializa una unica vez. 
 */
