@@ -8,6 +8,7 @@ import CustomerData from '../components/customer-data';
 import CustomerEdit from '../components/customer-edit';
 import { getCustomerById } from '../selectors/customers';
 import { fetchCustomers } from '../actions/fetch-customers';
+import { updateCustomer } from '../actions/update-customer';
 
 
 class CustomerContainer extends Component {
@@ -23,6 +24,8 @@ class CustomerContainer extends Component {
     // cada uno de los campos del formulario {name,ci,age}
     console.log(JSON.stringify(values));
     console.log(`Sin metodos ${values}`);
+    const { id } = values;
+    this.props.updateCustomer(id, values);
   }
 
   handleOnBack = () => {
@@ -91,7 +94,9 @@ class CustomerContainer extends Component {
 CustomerContainer.propTypes = {
   ci: PropTypes.string.isRequired,
   customer: PropTypes.object,
-  fetchCustomers: PropTypes.func.isRequired
+  //customer la primera vez que se renderiza esta en null, no es necesario que permanezca como required
+  fetchCustomers: PropTypes.func.isRequired,
+  updateCustomer: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, props) => ({
@@ -99,7 +104,7 @@ const mapStateToProps = (state, props) => ({
   customer: getCustomerById(state, props)
 })
 
-export default withRouter(connect(mapStateToProps, { fetchCustomers })(CustomerContainer));
+export default withRouter(connect(mapStateToProps, { fetchCustomers, updateCustomer })(CustomerContainer));
 
 /*
 - Usualmente mapStateToProps recibe el state. Tambien puede recibir con props de manera que
@@ -108,5 +113,5 @@ datos del cliente
 - DRY: DONT REPEAT YOURSELF (NO REPETIR)
 - Definicion de controles dinamicamente: en tiempo de ejecucion se puede definir cual es el control de
 lo que se quiere mostrar
-- InitialValues solo se inicializa una unica vez. 
+- InitialValues solo se inicializa una unica vez.
 */
