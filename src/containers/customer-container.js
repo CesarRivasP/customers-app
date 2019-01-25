@@ -25,7 +25,8 @@ class CustomerContainer extends Component {
     console.log(JSON.stringify(values));
     console.log(`Sin metodos ${values}`);
     const { id } = values;
-    this.props.updateCustomer(id, values);
+    return this.props.updateCustomer(id, values);
+    //UpdateCustomer es la promise, por lo que hay que hacer un return de la misma
   }
 
   handleOnBack = () => {
