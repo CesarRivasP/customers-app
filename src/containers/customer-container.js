@@ -25,13 +25,17 @@ class CustomerContainer extends Component {
     console.log(JSON.stringify(values));
     console.log(`Sin metodos ${values}`);
     const { id } = values;
-    return this.props.updateCustomer(id, values);
+    return this.props.updateCustomer(id, values); //aqui termina el proceso de submitting
     //UpdateCustomer es la promise, por lo que hay que hacer un return de la misma
   }
 
   handleOnBack = () => {
     this.props.history.goBack();  // goBack nos permite desplazarnos hacia atras
     //similar a ir hacia atras en el navegador
+  };
+
+  handleOnSubmitSuccess = () => {
+    this.props.history.goBack();  //Para indicar a que ruta se debe devolver
   };
 
   renderBody = () => (
@@ -67,6 +71,7 @@ class CustomerContainer extends Component {
                     {...this.props.customer}
                     onSubmit={this.handleSubmit}
                     onBack={this.handleOnBack}
+                    onSubmitSuccess={this.handleOnSubmitSuccess}
                   />
           }
           return null;
