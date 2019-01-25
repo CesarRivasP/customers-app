@@ -56,6 +56,16 @@ const myField = ({ input, meta, type, label, name }) => (
   </div>
 );
 
+const toNumber = (value) => value && Number(value); //Number() transforma un valor en numerico
+
+//test
+const toUpper = (value) => value && value.toUpperCase();
+
+//Para que el guardado de los datos sea con mayuscula, pero se visualice con minuscula
+//format es lo inverso de parse. Permite tomar el dato original, modificarlo por el que se quiere mostrar
+// y finalmente mostrar el dato formateado
+const toLower = (value) => value && value.toLowerCase();
+
 const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack }) => {
   return (
     <div>
@@ -76,6 +86,10 @@ const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack }) => {
           // validate={isRequired} //valicacion a nivel de field
           // validate={isNumber}
           label="Nombre"
+          //pruebas - Estas dos funciones se complementan
+          parse={toUpper} //parsea todo a minuscula
+          format={toLower}  //bajo estas dos condiciones, se guarda en mayuscula, pero se
+          //muestra en minuscula
         />
         <Field
           name="ci" /*component="input"*/
@@ -95,6 +109,7 @@ const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack }) => {
             campo como un tipo string, por lo que debe ser validado de otro manera */
           validate={isNumber}
           label="Edad"
+          parse={toNumber}  //modifica el tipo de valor que esta viniendo a numero
         />
       {/* Como ya hay un div que engloba todo en myField, se pueden borrar los div's que contienen
       a cada Field */}
