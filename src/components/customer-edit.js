@@ -56,7 +56,7 @@ const myField = ({ input, meta, type, label, name }) => (
   </div>
 );
 
-const CustomerEdit = ({ name, ci, age, handleSubmit, submiting, onBack }) => {
+const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack }) => {
   return (
     <div>
       <h2>Edicion del cliente</h2>
@@ -103,7 +103,7 @@ const CustomerEdit = ({ name, ci, age, handleSubmit, submiting, onBack }) => {
           type="submit" //asi ejecuta la funcion de submit del formulario
           //validacion en caso que el envio de los datos demore en el servidor, para evitar que el usuario
           //presione reiteradas veces el boton aceptar mientras envia los datos, se desabilita el button
-          disabled={submiting}  //submiting es una propiedad booleana que provee redux form
+          disabled={submitting}  //submitting es una propiedad booleana que provee redux form
         >Aceptar</button> {/*La accion se va a manejar desde el customer container*/}
         <button onClick={onBack}>Cancelar</button>
       </CustomersActions>
