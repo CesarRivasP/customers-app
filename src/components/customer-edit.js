@@ -6,12 +6,12 @@ import CustomersActions from './customers-actions';
 import { setPropsAsInitial } from '../helpers/set-props-as-initial'; //High Order Component
 import '../index.css';
 
-const isRequired = (value) => (
-  //en value llega algo ?
-  !value && "Este campo es requerido"
-  //En el caso de que no haya error, retorna undefined
-  //Con undefined indica que el campo es correcto
-);
+// const isRequired = (value) => (
+//   //en value llega algo ?
+//   !value && "Este campo es requerido"
+//   //En el caso de que no haya error, retorna undefined
+//   //Con undefined indica que el campo es correcto
+// );
 
 const isNumber = (value) => ( //para asegurar que venga un tipe numerico
   //si no es un numero (NOT AT NUMBER) -> mostrar un mensaje
