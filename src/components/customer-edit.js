@@ -66,6 +66,13 @@ const toUpper = (value) => value && value.toUpperCase();
 // y finalmente mostrar el dato formateado
 const toLower = (value) => value && value.toLowerCase();
 
+const onlyGrow = (value, previousValue, values) =>
+// value, previousValue, values -> estos son todos los valores que existen dentro de reduxform
+  value && previousValue && (value > previousValue ? value : previousValue);
+//value es el nuevo valor que el usuario ingreso
+//checkea que si se esta pasando un valor inferior al valor previo, entonces va a mostrar el valor previo
+//se pueden sumar valores, pero no decrementar
+
 const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack }) => {
   return (
     <div>
@@ -110,6 +117,8 @@ const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack }) => {
           validate={isNumber}
           label="Edad"
           parse={toNumber}  //modifica el tipo de valor que esta viniendo a numero
+          normalize={onlyGrow}  //siempre va a tener que poner una cantidad mayor a la que se tenia
+          //no permite que el nuevo valor sea inferior al valor previo
         />
       {/* Como ya hay un div que engloba todo en myField, se pueden borrar los div's que contienen
       a cada Field */}
