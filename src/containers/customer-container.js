@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { SubmissionError } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
@@ -25,8 +26,19 @@ class CustomerContainer extends Component {
     console.log(JSON.stringify(values));
     console.log(`Sin metodos ${values}`);
     const { id } = values;
-    return this.props.updateCustomer(id, values); //aqui termina el proceso de submitting
+    //before return this.props.updateCustomer(id, values); aqui termina el proceso de submitting
     //UpdateCustomer es la promise, por lo que hay que hacer un return de la misma
+
+    //para evaluar si el resultado de la promise viene con un error o note
+    return this.props.updateCustomer(id, values)
+      .then((result) => {
+        if(result.error){ //result viene con error, es decir, viene en true
+          throw new SubmissionError(result.payload); //toma el payload y lo pasa al SubmissionError
+        }
+      })
+      .catch((error) => {
+        throw new SubmissionError(error);
+      });
   }
 
   handleOnBack = () => {
@@ -120,4 +132,6 @@ datos del cliente
 - Definicion de controles dinamicamente: en tiempo de ejecucion se puede definir cual es el control de
 lo que se quiere mostrar
 - InitialValues solo se inicializa una unica vez.
+- error es parte de la nomenclatura propia de las promises
+- SubmissionError, lo provee redux-form
 */
