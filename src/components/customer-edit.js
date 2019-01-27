@@ -117,7 +117,7 @@ const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack }) => {
           validate={isNumber}
           label="Edad"
           parse={toNumber}  //modifica el tipo de valor que esta viniendo a numero
-          normalize={onlyGrow}  //siempre va a tener que poner una cantidad mayor a la que se tenia
+          normalize={onlyGrow} // siempre va a tener que poner una cantidad mayor a la que se tenia
           //no permite que el nuevo valor sea inferior al valor previo
         />
       {/* Como ya hay un div que engloba todo en myField, se pueden borrar los div's que contienen
