@@ -55,7 +55,7 @@ const myField = ({ input, meta, type, label, name }) => (
       si el campo viene vacio  */}
   </div>
 );
-
+//Estas validaciones son las Validaciones del lado del cliente
 const toNumber = (value) => value && Number(value); //Number() transforma un valor en numerico
 
 //test
