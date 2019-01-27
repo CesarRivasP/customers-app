@@ -10,7 +10,7 @@ const CustomersList = ({customers, urlPath}) => {
       {
         customers.map(customer => (
           <CustomersListItem
-            key={customer.ci}
+            key={`${customer.ci}${customer.name}`}
             name={customer.name}
             ci={customer.ci}
             editAction={'Editar'}
