@@ -6,7 +6,7 @@ const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
 
-server.listen(3001, () => {
+server.listen(3001, () => { //puerto a utilizar
   console.log('JSON Server is running')
 })
 //simulacion de una validacion ante un put, para un cliente determinado
@@ -22,7 +22,7 @@ server.put('/customers/30000001', (req, res) => {
       return res.send({
         error: true,  //se genero un error si esta en true
         validation: { //se define la estructura de validacion
-          age: 'Debe ser menor de edad',  //campos que no cumplieron la validacion, y su explicacion
+          age: 'Debe ser menor de edad', //campos que no cumplieron la validacion, y su explicacion
           name: 'El nombre es incorrecto'
         }
       });
