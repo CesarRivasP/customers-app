@@ -30,8 +30,6 @@ server.put('/customers/30000001', (req, res) => {
       res.send('ok');
     }
   });
-
-
 })
 
 server.use(router)
