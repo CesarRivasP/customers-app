@@ -68,10 +68,14 @@ const toLower = (value) => value && value.toLowerCase();
 
 const onlyGrow = (value, previousValue, values) =>
 // value, previousValue, values -> estos son todos los valores que existen dentro de reduxform
-  value && previousValue && (value > previousValue ? value : previousValue);
+//---Before value && previousValue && (value > previousValue ? value : previousValue);
+// ---impide ingresar nuevo valor si no hay un valor inicial
 //value es el nuevo valor que el usuario ingreso
 //checkea que si se esta pasando un valor inferior al valor previo, entonces va a mostrar el valor previo
 //se pueden sumar valores, pero no decrementar
+  value && (!previousValue ? value :  (value > previousValue ? value : previousValue));
+  //Si no hay nada en previousValue, debe dejar value
+
 
 const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }) => {
   return (
