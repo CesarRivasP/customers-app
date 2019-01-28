@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import HomeContainer from './containers/home-container';
 import CustomersContainer from './containers/customers-container';
 import CustomerContainer from './containers/customer-container.js';
+import NewCustomerContainer from './containers/new-customer-container.js';
 import './App.css';
 
 
@@ -77,7 +78,7 @@ class App extends Component {
               <Redirect to="/home" />
             </Route>
             <Route exact path="/customers" component={CustomersContainer} />
-            {/* <Route path="/customers/:ci" component={CustomerContainer} /> */}
+            <Route path="/customers/new" component={NewCustomerContainer} /> */}
             <Route
               path="/customers/:ci"
               render={(props) =>
