@@ -1,5 +1,5 @@
 import React from 'react';
-// import { connect } from 'react-redux';
+import { Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form'; //High Order Component
 import CustomersActions from './customers-actions';
@@ -73,7 +73,7 @@ const onlyGrow = (value, previousValue, values) =>
 //checkea que si se esta pasando un valor inferior al valor previo, entonces va a mostrar el valor previo
 //se pueden sumar valores, pero no decrementar
 
-const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack }) => {
+const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }) => {
   return (
     <div>
       <h2>Edicion del cliente</h2>
@@ -127,10 +127,20 @@ const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack }) => {
           type="submit" //asi ejecuta la funcion de submit del formulario
           //validacion en caso que el envio de los datos demore en el servidor, para evitar que el usuario
           //presione reiteradas veces el boton aceptar mientras envia los datos, se desabilita el button
-          disabled={submitting}  //submitting es una propiedad booleana que provee redux form
+          disabled={pristine || submitting}  //submitting es una propiedad booleana que provee redux form
+          //pristine || submitting ante estos dos casos, va a desabilitar el boton de submit
         >Aceptar</button> {/*La accion se va a manejar desde el customer container*/}
-        <button onClick={onBack}>Cancelar</button>
+        <button type="button" onClick={onBack}
+          disabled={submitting} //Para que deshabilite cancelar cuando ejecuta un proceso de envio de datos al server
+          >Cancelar</button>
       </CustomersActions>
+      <Prompt
+        //Se va a mostrar cuando haya realizado una modificacion sobre el formulario
+        when={!pristine && !submitSucceeded}   // y no se haya enviado o aceptado los cambios
+      // Tambiens se validara que no este realizandose el submitSucceeded, el cual se realiza cuando
+      //envio correctamente el formulario
+      //si no hubo cambios, no debe mostrar el alert
+        message="Se perderan los datos si continua" />
       </form>
     </div>
   );
@@ -172,4 +182,6 @@ se necesitan (name,ci,age)
 - Las validaciones a nivel de field tiene prioridad sobre la validacion global.
 - Es importante que la funcion que se le pasa a la accion que provee redux form 'onSubmit' se
 llame 'handleSubmit', ya que handleSubmit es una propiedad funcion que provee redux form
+- Si no se indican los types de los botones, por defecto, al no encontrar un type ejecuta igualmente, por
+ejemplo el submit que pertenece a otro boton independientemente de que no se le haya indicado explicatamente
 */
