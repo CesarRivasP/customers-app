@@ -3,13 +3,30 @@
 //     .then(v => v.json())
 // )
 
-export const apiGet = (url) => () => fetch(url).then(v => v.json())
+export const apiGet = (url) => () => fetch(url).then(v => v.json());
+
+export const apiPost = (url, obj) => () =>
+  fetch(`${url}`, {
+    method: 'POST',
+    body: JSON.stringify(obj),
+    headers: new Headers({ 'Content-type': 'application/json'})
+  })
+  .then((value) => value.json())
+  .then((result) => {
+    if(result.error){
+      return Promise.reject(result.validation);
+    }
+    return result;
+  })
+  .catch((error) => {
+    return Promise.reject(error);
+  })
 
 export const apiPut = (url, id, obj) => () =>
   fetch(`${url}/${id}`, {
     method: 'PUT', // method: metodo http a utilizar. Aqui se indica el metodo a ejecutar
     body: JSON.stringify(obj),  //para hacer stringify del objeto
-    headers: new Headers({'Content-type': 'application/json'})  //en base de lo que indica el json server new Headers()
+    headers: new Headers({ 'Content-type': 'application/json' })  //en base de lo que indica el json server new Headers()
     //el header tiene el 'application/json' para que el tipo de envio sea conocido
   })
   .then((value) => value.json())  //valor de retorno
