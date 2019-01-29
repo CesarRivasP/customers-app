@@ -78,7 +78,7 @@ class App extends Component {
               <Redirect to="/home" />
             </Route>
             <Route exact path="/customers" component={CustomersContainer} />
-            <Route path="/customers/new" component={NewCustomerContainer} /> */}
+            <Route path="/customers/new" component={NewCustomerContainer} />
             <Route
               path="/customers/:ci"
               render={(props) =>
