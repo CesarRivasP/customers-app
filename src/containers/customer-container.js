@@ -32,6 +32,7 @@ class CustomerContainer extends Component {
     //para evaluar si el resultado de la promise viene con un error o note
     return this.props.updateCustomer(id, values)
       .then((result) => {
+        //validacion de lado del server
         if(result.error){ //result viene con error, es decir, viene en true
           throw new SubmissionError(result.payload); //toma el payload y lo pasa al SubmissionError
         }
