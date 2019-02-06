@@ -5,6 +5,5 @@ import { apiPost } from '../api';
 
 export const insertCustomer = createAction(
   INSERT_CUSTOMER,
-  // customer => console.log(customer)
   (customer) => apiPost(urlCustomers, customer)()
 );
