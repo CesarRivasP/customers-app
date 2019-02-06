@@ -9,46 +9,28 @@ import { insertCustomer } from '../actions/insert-customer';
 
 
 class NewCustomerContainer extends Component {
-  //
-  // handleSubmit = (values) => {
-  //   // const { insertCustomer } = this.props;
-  //   // return this.props.insertCustomer(values)
-  //   //         .then((result) => {
-  //   //           if(result.error){
-  //   //             throw new SubmissionError(result.payload);
-  //   //           }
-  //   //         })
-  //   //         .catch((error) => {
-  //   //           throw new SubmissionError(error);
-  //   //         })
-  //   console.log(JSON.stringify(values));
-  //   console.log(`Sin metodos ${values}`);
-  //
-  //   //before return this.props.updateCustomer(id, values); aqui termina el proceso de submitting
-  //   //UpdateCustomer es la promise, por lo que hay que hacer un return de la misma
-  //
-  //   //para evaluar si el resultado de la promise viene con un error o note
-  //   this.props.insertCustomer(values)
-  //     // .then((result) => {
-  //     //   //validacion de lado del server
-  //     //   if(result.error){ //result viene con error, es decir, viene en true
-  //     //     throw new SubmissionError(result.payload); //toma el payload y lo pasa al SubmissionError
-  //     //   }
-  //     // })
-  // };
 
   handleSubmit = (values) => {
-    this.props.insertCustomer(values);
+    const { insertCustomer } = this.props;
+    insertCustomer(values)
+      .then((result) => {
+        if(result.error){
+          throw new SubmissionError(result.payload);
+        }
+      })
+      .catch((error) => {
+        throw new SubmissionError(error);
+      })
   };
 
   handleOnSubmitSuccess = () => { //cuando el submit es exitoso
-    // const { history } = this.props;
-    this.props.history.goBack();
+    const { history } = this.props;
+    history.goBack();
   };
 
   handleOnBack = () => {  // al cancelar
-    // const { history } = this.props;
-    this.props.history.goBack();
+    const { history } = this.props;
+    history.goBack();
   };
 
   renderbody = () => {
