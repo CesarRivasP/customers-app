@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form'; //High Order Component
@@ -37,24 +37,24 @@ const validate = (values) => {
   return error;
 };
 
-const myField = ({ input, meta, type, label, name }) => (
-  //En input viene toda la informacion del input
-  //meta indica cuando hay errores y los distintos estados del campo
-  <div>
-    <label htmlFor={name}>{label}</label>
-    <input
-      // before type="text"
-      {...input} //Aqui se le estan pasando todas las propiedades de input (el campo original)
-//cuando no se le pase ningun type debera asumir que viene un string, que es un tipe text
-      type={ !type ? "text" : type}
-  //cuando no venga nada en type, que sea text, si viene con un valor, se muestre el type que posee
-    />
-    { meta.touched && meta.error && <span>{ meta.error }</span> }
-    {/* si viene diferente de undefined */}
-    {/* meta.touched se le agrego esta validacion para que de error solo si el campo fue tocado, y asi no da error
-      si el campo viene vacio  */}
-  </div>
-);
+// const renderField = ({ input, meta, type, label, name }) => (
+//   //En input viene toda la informacion del input
+//   //meta indica cuando hay errores y los distintos estados del campo
+//   <div>
+//     <label htmlFor={name}>{label}</label>
+//     <input
+//       // before type="text"
+//       {...input} //Aqui se le estan pasando todas las propiedades de input (el campo original)
+// //cuando no se le pase ningun type debera asumir que viene un string, que es un tipe text
+//       type={ !type ? "text" : type}
+//   //cuando no venga nada en type, que sea text, si viene con un valor, se muestre el type que posee
+//     />
+//     { meta.touched && meta.error && <span>{ meta.error }</span> }
+//     {/* si viene diferente de undefined */}
+//     {/* meta.touched se le agrego esta validacion para que de error solo si el campo fue tocado, y asi no da error
+//       si el campo viene vacio  */}
+//   </div>
+// );
 //Estas validaciones son las Validaciones del lado del cliente
 const toNumber = (value) => value && Number(value); //Number() transforma un valor en numerico
 
@@ -76,78 +76,116 @@ const onlyGrow = (value, previousValue, values) =>
   value && (!previousValue ? value :  (value > previousValue ? value : previousValue));
   //Si no hay nada en previousValue, debe dejar value
 
+class CustomerEdit extends Component {
 
-const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }) => {
-  return (
+  componentDidMount (){
+    //cuando se monte el componente, se debe establecer el foco en cuadroTexto
+    // if(this.cuadroTexto){ //diferente de null
+    //   this.cuadroTexto.focus();
+    // }
+    if(this.txt){
+      this.txt.focus();
+    }
+  }
+
+  renderField = ({ input, meta, type, label, name, withFocus }) => (
+    //En input viene toda la informacion del input
+    //meta indica cuando hay errores y los distintos estados del campo
     <div>
-      <h2>Edicion del cliente</h2>
-      {/* <h3>Name: {name}/ C.I: {ci} / Edad: {age}</h3> */}
-      {/* form>(div>label+Field)*3  EMMET */}
-      <form
-        // action="" -> action nativa del formulario
-        //action que provee redux form
-        onSubmit={handleSubmit}>
-        {/* <label htmlFor="name">Nombre</label> */}
-        <Field
-          name="name"
-// component="input" Para usar la validacion hay que preescindir del component input en forma directa
-//Hay que generar nuestro propio componente
-          component={myField}
-          type="text"
-          // validate={isRequired} //valicacion a nivel de field
-          // validate={isNumber}
-          label="Nombre"
-          //pruebas - Estas dos funciones se complementan
-          parse={toUpper} //parsea todo a minuscula
-          format={toLower}  //bajo estas dos condiciones, se guarda en mayuscula, pero se
-          //muestra en minuscula
-        />
-        <Field
-          name="ci" /*component="input"*/
-          type="text"
-          component={myField}
-          validate={isNumber}
-          //Para establecer varias validaciones
-          // validate={[isRequired, isNumber]}
-          label="C.I"handleSubmit
-        />
-        <Field
-          name="age"
-          type="number"
-          component={myField}
-          /* - al indicar un valor numero, no permite ingresar otra cosa que no sean numeros
-            - al validar un tipo numerico de la misma forma que los string, espieza a tomar el
-            campo como un tipo string, por lo que debe ser validado de otro manera */
-          validate={isNumber}
-          label="Edad"
-          parse={toNumber}  //modifica el tipo de valor que esta viniendo a numero
-          normalize={onlyGrow} // siempre va a tener que poner una cantidad mayor a la que se tenia
-          //no permite que el nuevo valor sea inferior al valor previo
-        />
-      {/* Como ya hay un div que engloba todo en myField, se pueden borrar los div's que contienen
-      a cada Field */}
-      <CustomersActions>
-        <button
-          type="submit" //asi ejecuta la funcion de submit del formulario
-          //validacion en caso que el envio de los datos demore en el servidor, para evitar que el usuario
-          //presione reiteradas veces el boton aceptar mientras envia los datos, se desabilita el button
-          disabled={pristine || submitting}  //submitting es una propiedad booleana que provee redux form
-          //pristine || submitting ante estos dos casos, va a desabilitar el boton de submit
-        >Aceptar</button> {/*La accion se va a manejar desde el customer container*/}
-        <button type="button" onClick={onBack}
-          disabled={submitting} //Para que deshabilite cancelar cuando ejecuta un proceso de envio de datos al server
-          >Cancelar</button>
-      </CustomersActions>
-      <Prompt
-        //Se va a mostrar cuando haya realizado una modificacion sobre el formulario
-        when={!pristine && !submitSucceeded}   // y no se haya enviado o aceptado los cambios
-      // Tambiens se validara que no este realizandose el submitSucceeded, el cual se realiza cuando
-      //envio correctamente el formulario
-      //si no hubo cambios, no debe mostrar el alert
-        message="Se perderan los datos si continua" />
-      </form>
+      <label htmlFor={name}>{label}</label>
+      <input
+        // before type="text"
+        {...input} //Aqui se le estan pasando todas las propiedades de input (el campo original)
+  //cuando no se le pase ningun type debera asumir que viene un string, que es un tipe text
+        type={ !type ? "text" : type}
+    //cuando no venga nada en type, que sea text, si viene con un valor, se muestre el type que posee
+        ref={withFocus && ((txt) => this.txt = txt) }
+      />
+      { meta.touched && meta.error && <span>{ meta.error }</span> }
+      {/* si viene diferente de undefined */}
+      {/* meta.touched se le agrego esta validacion para que de error solo si el campo fue tocado, y asi no da error
+        si el campo viene vacio  */}
     </div>
   );
+
+  render() {
+    // const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }) => {
+    const { name, ci, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }= this.props;
+
+    return (
+      <div>
+        <h2>Edicion del cliente</h2>
+        {/* <h3>Name: {name}/ C.I: {ci} / Edad: {age}</h3> */}
+        {/* form>(div>label+Field)*3  EMMET */}
+        {/* Componente no controlado */}
+        {/* Nuevo Cuadro de texto: <input type="text" ref={(txt) => this.cuadroTexto = txt}/> Example*/}
+        <form
+          // action="" -> action nativa del formulario
+          //action que provee redux form
+          onSubmit={handleSubmit}>
+          {/* <label htmlFor="name">Nombre</label> */}
+          <Field
+            name="name"
+            // component="input" Para usar la validacion hay que preescindir del component input en forma directa
+            //Hay que generar nuestro propio componente
+            component={this.renderField}
+            type="text"
+            // validate={isRequired} //valicacion a nivel de field
+            // validate={isNumber}
+            label="Nombre"
+            //pruebas - Estas dos funciones se complementan
+            parse={toUpper} //parsea todo a minuscula
+            format={toLower}  //bajo estas dos condiciones, se guarda en mayuscula, pero se
+            //muestra en minuscula
+            withFocus
+          />
+          <Field
+            name="ci" /*component="input"*/
+            type="text"
+            component={this.renderField}
+            validate={isNumber}
+            //Para establecer varias validaciones
+            // validate={[isRequired, isNumber]}
+            label="C.I"
+          />
+          <Field
+            name="age"
+            type="number"
+            component={this.renderField}
+            /* - al indicar un valor numero, no permite ingresar otra cosa que no sean numeros
+            - al validar un tipo numerico de la misma forma que los string, espieza a tomar el
+            campo como un tipo string, por lo que debe ser validado de otro manera */
+            validate={isNumber}
+            label="Edad"
+            parse={toNumber}  //modifica el tipo de valor que esta viniendo a numero
+            normalize={onlyGrow} // siempre va a tener que poner una cantidad mayor a la que se tenia
+            //no permite que el nuevo valor sea inferior al valor previo
+          />
+          {/* Como ya hay un div que engloba todo en renderField, se pueden borrar los div's que contienen
+          a cada Field */}
+          <CustomersActions>
+            <button
+              type="submit" //asi ejecuta la funcion de submit del formulario
+              //validacion en caso que el envio de los datos demore en el servidor, para evitar que el usuario
+              //presione reiteradas veces el boton aceptar mientras envia los datos, se desabilita el button
+              disabled={pristine || submitting}  //submitting es una propiedad booleana que provee redux form
+              //pristine || submitting ante estos dos casos, va a desabilitar el boton de submit
+              >Aceptar</button> {/*La accion se va a manejar desde el customer container*/}
+              <button type="button" onClick={onBack}
+                disabled={submitting} //Para que deshabilite cancelar cuando ejecuta un proceso de envio de datos al server
+                >Cancelar</button>
+              </CustomersActions>
+              <Prompt
+                //Se va a mostrar cuando haya realizado una modificacion sobre el formulario
+                when={!pristine && !submitSucceeded}   // y no se haya enviado o aceptado los cambios
+                // Tambiens se validara que no este realizandose el submitSucceeded, el cual se realiza cuando
+                //envio correctamente el formulario
+                //si no hubo cambios, no debe mostrar el alert
+                message="Se perderan los datos si continua" />
+          </form>
+        </div>
+      );
+   }
 }
 
 CustomerEdit.propTypes = {
