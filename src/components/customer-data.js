@@ -4,7 +4,7 @@ import CustomersActions from './customers-actions';
 import '../index.css';
 
 
-const CustomerData = ({ name, ci, age, onBack }) => {
+const CustomerData = ({ name, ci, age, onBack, isDeleteAllow, onDelete }) => {
   return (
     <div>
       <div className="customer-data">
@@ -15,6 +15,9 @@ const CustomerData = ({ name, ci, age, onBack }) => {
       </div>
       <CustomersActions>
         <button onClick={onBack}>Volver</button>
+        {
+          isDeleteAllow && <button onClick={onDelete}>Eliminar</button>
+        }
       </CustomersActions>
     </div>
   );
@@ -24,7 +27,9 @@ CustomerData.proptypes = {
   ci: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   age: PropTypes.number,  //opcional
-  onBack: PropTypes.func.isRequired
+  onBack: PropTypes.func.isRequired,
+  isDeleteAllow: Proptypes.bool,
+  onDelete: Proptypes.func
 }
 
 export default CustomerData;
