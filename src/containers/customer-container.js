@@ -51,11 +51,41 @@ class CustomerContainer extends Component {
     this.props.history.goBack();  //Para indicar a que ruta se debe devolver
   };
 
+  renderCustomerControl = (isEdit, isDelete) => {
+    const { customer } = this.props;
+    if(customer){ //cuando no venga en nulo
+      const CustomerControl = isEdit ? CustomerEdit : CustomerData;
+      return <CustomerControl
+              {...this.props.customer}
+              onSubmit={this.handleSubmit}
+              onBack={this.handleOnBack}
+              onSubmitSuccess={this.handleOnSubmitSuccess}
+            />
+    }
+    return null;
+  };
+
   renderBody = () => (
     // se indica ante que path se quiere reaccionar
+    //Se tienen dos evaluaciones de ruta, si es edicion o eliminacion
     <Route
       path="/customers/:ci/edit"
-      children={({ match }) => {
+      //after
+      //Para poder usar rutas anidadas
+      //Se puede definir rutas dinamicamente, y que estan esten anidadas
+      children={({ match: isEdit }) => (
+        <Route
+          path="/customers/:ci/del"
+          children={
+            ({ match: isDelete }) => (  //--> alias
+              // this.renderCustomerControl(match)
+              this.renderCustomerControl(isEdit, isDelete)  //Se va a hacer una doble evaluacion
+            )
+          }
+        />
+      )
+
+      // children={({ match }) => this.renderCustomerControl(match)  {
       //Si encuentra la url, match viene en true, si no en false
         // match ? <p>Es edicion</p> : <p>No es edicion</p>
         //match ? //el valor que ofrece match es un true o false, si se corresponde con el path o no
@@ -77,23 +107,25 @@ class CustomerContainer extends Component {
           //         { ...this.props.customer}
           //         onSubmit={this.handleSubmit}  //funcion manejadora del evento
           //         onBack={this.handleOnBack} />
-          //AFTER - 2 forma
-          if(this.props.customer){ //cuando no venga en nulo
-            const CustomerControl = match ? CustomerEdit : CustomerData;
-            return <CustomerControl
-                    {...this.props.customer}
-                    onSubmit={this.handleSubmit}
-                    onBack={this.handleOnBack}
-                    onSubmitSuccess={this.handleOnSubmitSuccess}
-                  />
-          }
-          return null;
+
+          //Before - 2 forma
+          // if(this.props.customer){ //cuando no venga en nulo
+          //   const CustomerControl = match ? CustomerEdit : CustomerData;
+          //   return <CustomerControl
+          //           {...this.props.customer}
+          //           onSubmit={this.handleSubmit}
+          //           onBack={this.handleOnBack}
+          //           onSubmitSuccess={this.handleOnSubmitSuccess}
+          //         />
+          // }
+          // return null;
           // Con esta solucion, se renderiza solamente cuando tiene un cliente.
           //Como la 1 vez que se genera, no se esta estableciendo, solo se establece el
           //initial value cuando en efecto hay un customer.
-      }}
-    />
-  )
+
+      //}
+    } />
+  );
 
   render () {
     const { ci } = this.props;
@@ -135,4 +167,11 @@ lo que se quiere mostrar
 - InitialValues solo se inicializa una unica vez.
 - error es parte de la nomenclatura propia de las promises
 - SubmissionError, lo provee redux-form
+*/
+/* -- Doble condicion --
+path="/customers/:dni/edit"
+  -> isEdit ?
+(si no isEdit)
+  path="/customers/:dni/del"
+    -> isDelete ?
 */
