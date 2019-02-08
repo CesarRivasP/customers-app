@@ -34,7 +34,13 @@ import { getCustomers } from '../selectors/customers';
 class CustomersContainer extends Component {
 
   componentDidMount() {
-    this.props.fetchCustomers();
+    const { fetchCustomers, customers } = this.props;
+    if (customers.length === 0){  //si tiene un customer grabado, es decir, si esta en 0
+    //no tiene cargado un cliente, por lo que asume que nunca se hizo el fetchCustomers
+    // y lo ejecuta
+      fetchCustomers();
+    }
+    // si ya tiene clientes en el listado, no se debe buscar mas datos del servidor
   }
 
   handleAddNew = () => {
