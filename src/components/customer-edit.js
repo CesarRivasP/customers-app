@@ -80,7 +80,6 @@ class CustomerEdit extends Component {
 
   componentDidMount (){
     //cuando se monte el componente, se debe establecer el foco en cuadroTexto
-<<<<<<< HEAD
     // if(this.cuadroTexto){ //diferente de null
     //   this.cuadroTexto.focus();
     // }
@@ -109,13 +108,6 @@ class CustomerEdit extends Component {
     </div>
   );
 
-=======
-    if(this.cuadroTexto){ //diferente de null
-      this.cuadroTexto.focus();
-    }
-  }
-
->>>>>>> f7085a62ad6352ac6111d53c22ab723c6de6dc36
   render() {
     // const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }) => {
     const { name, ci, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }= this.props;
@@ -126,11 +118,7 @@ class CustomerEdit extends Component {
         {/* <h3>Name: {name}/ C.I: {ci} / Edad: {age}</h3> */}
         {/* form>(div>label+Field)*3  EMMET */}
         {/* Componente no controlado */}
-<<<<<<< HEAD
         {/* Nuevo Cuadro de texto: <input type="text" ref={(txt) => this.cuadroTexto = txt}/> Example*/}
-=======
-        Nuevo Cuadro de texto: <input type="text" ref={(txt) => this.cuadroTexto = txt}/>
->>>>>>> f7085a62ad6352ac6111d53c22ab723c6de6dc36
         <form
           // action="" -> action nativa del formulario
           //action que provee redux form
@@ -140,11 +128,7 @@ class CustomerEdit extends Component {
             name="name"
             // component="input" Para usar la validacion hay que preescindir del component input en forma directa
             //Hay que generar nuestro propio componente
-<<<<<<< HEAD
             component={this.renderField}
-=======
-            component={myField}
->>>>>>> f7085a62ad6352ac6111d53c22ab723c6de6dc36
             type="text"
             // validate={isRequired} //valicacion a nivel de field
             // validate={isNumber}
@@ -153,36 +137,21 @@ class CustomerEdit extends Component {
             parse={toUpper} //parsea todo a minuscula
             format={toLower}  //bajo estas dos condiciones, se guarda en mayuscula, pero se
             //muestra en minuscula
-<<<<<<< HEAD
             withFocus
-=======
->>>>>>> f7085a62ad6352ac6111d53c22ab723c6de6dc36
           />
           <Field
             name="ci" /*component="input"*/
             type="text"
-<<<<<<< HEAD
             component={this.renderField}
             validate={isNumber}
             //Para establecer varias validaciones
             // validate={[isRequired, isNumber]}
             label="C.I"
-=======
-            component={myField}
-            validate={isNumber}
-            //Para establecer varias validaciones
-            // validate={[isRequired, isNumber]}
-            label="C.I"handleSubmit
->>>>>>> f7085a62ad6352ac6111d53c22ab723c6de6dc36
           />
           <Field
             name="age"
             type="number"
-<<<<<<< HEAD
             component={this.renderField}
-=======
-            component={myField}
->>>>>>> f7085a62ad6352ac6111d53c22ab723c6de6dc36
             /* - al indicar un valor numero, no permite ingresar otra cosa que no sean numeros
             - al validar un tipo numerico de la misma forma que los string, espieza a tomar el
             campo como un tipo string, por lo que debe ser validado de otro manera */
@@ -192,11 +161,7 @@ class CustomerEdit extends Component {
             normalize={onlyGrow} // siempre va a tener que poner una cantidad mayor a la que se tenia
             //no permite que el nuevo valor sea inferior al valor previo
           />
-<<<<<<< HEAD
           {/* Como ya hay un div que engloba todo en renderField, se pueden borrar los div's que contienen
-=======
-          {/* Como ya hay un div que engloba todo en myField, se pueden borrar los div's que contienen
->>>>>>> f7085a62ad6352ac6111d53c22ab723c6de6dc36
           a cada Field */}
           <CustomersActions>
             <button
@@ -222,8 +187,6 @@ class CustomerEdit extends Component {
       );
    }
 }
-
-
 
 CustomerEdit.propTypes = {
   name: PropTypes.string,
