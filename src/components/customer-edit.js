@@ -83,6 +83,8 @@ const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack, pristin
       <h2>Edicion del cliente</h2>
       {/* <h3>Name: {name}/ C.I: {ci} / Edad: {age}</h3> */}
       {/* form>(div>label+Field)*3  EMMET */}
+      {/* Componente no controlado */}
+      Nuevo Cuadro de texto: <input type="text" ref={(txt) => this.txt = txt}/>
       <form
         // action="" -> action nativa del formulario
         //action que provee redux form
