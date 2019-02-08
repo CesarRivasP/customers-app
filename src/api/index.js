@@ -16,7 +16,7 @@ export const apiPost = (url, obj) => () =>
     if(result.error){
       return Promise.reject(result.validation);
     }
-    return result;
+    return result;  //retorno de los datos de cliente
   })
   .catch((error) => {
     return Promise.reject(error);
