@@ -51,15 +51,23 @@ class CustomerContainer extends Component {
     this.props.history.goBack();  //Para indicar a que ruta se debe devolver
   };
 
-  renderCustomerControl = (isEdit, isDelete) => {
-    const { customer } = this.props;
-    if(customer){ //cuando no venga en nulo
+  handleOnDelete = () => {
+    console.log('handleOnDelete');
+  };
+
+  renderCustomerControl = (isEdit, isDelete) => { //El match es un objeto, y eso es lo que viene como parametro
+    // const { customer } = this.props;
+
+    if(this.props.customer){ //cuando no venga en nulo
       const CustomerControl = isEdit ? CustomerEdit : CustomerData;
       return <CustomerControl
               {...this.props.customer}
               onSubmit={this.handleSubmit}
               onBack={this.handleOnBack}
               onSubmitSuccess={this.handleOnSubmitSuccess}
+              isDeleteAllow={!!isDelete} //isDeleteAllow debe ser un booleano, y para lograr que lo sea
+              // se usa la doble negacion. Si viene un valor thuthy, se transforma en true
+              onDelete={this.handleOnDelete}
             />
     }
     return null;
@@ -75,7 +83,7 @@ class CustomerContainer extends Component {
       //Se puede definir rutas dinamicamente, y que estan esten anidadas
       children={({ match: isEdit }) => (
         <Route
-          path="/customers/:ci/del"
+          path="/customers/:ci/delete"
           children={
             ({ match: isDelete }) => (  //--> alias
               // this.renderCustomerControl(match)
