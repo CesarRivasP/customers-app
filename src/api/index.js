@@ -45,3 +45,20 @@ export const apiPut = (url, id, obj) => () =>
 - Usamos el then para transformar lo que viene en el json resultante
 - result es el resultado del then anterior que transforma los valores resultantes en json
 */
+
+export const apiDelete = (url, id) => () =>
+  fetch(`${url}/${id}`,{
+    method: 'DELETE',
+    // body: JSON.stringify(obj),
+    headers: new Headers({ 'Content-type': 'application/json' })
+  })
+  .then((value) => value.json())
+  .then((result) => {
+    if(result.error){
+      return Promise.reject(result.validation);
+    }
+    return id;
+  })
+  .catch((error) => {
+    return Promise.reject(error);
+  })
