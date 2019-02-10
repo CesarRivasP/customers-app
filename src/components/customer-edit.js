@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form'; //High Order Component
+import { compose } from 'redux';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import CustomersActions from './customers-actions';
+import green from '@material-ui/core/colors/green';
 import { setPropsAsInitial } from '../helpers/set-props-as-initial'; //High Order Component
 import '../index.css';
 
@@ -12,6 +16,28 @@ import '../index.css';
 //   //En el caso de que no haya error, retorna undefined
 //   //Con undefined indica que el campo es correcto
 // );
+
+const styles = theme => ({
+  margin: theme.spacing.unit,
+  // cssRoot: {
+  //   fontFamily: ['Roboto'].join(','),
+  //   color: theme.palette.getContrastText(purple[500]),
+  //   backgroundColor: purple[500],
+  //   '&:hover': {
+  //     backgroundColor: purple[700],
+  //   }
+  // }
+});
+
+const theme = createMuiTheme({
+  palette: {
+    // primary: #2a5298,
+    primary: green,
+  },
+  typography: {
+    useNextVariants: true,
+  },
+});
 
 const isNumber = (value) => ( //para asegurar que venga un tipe numerico
   //si no es un numero (NOT AT NUMBER) -> mostrar un mensaje
@@ -111,7 +137,7 @@ class CustomerEdit extends Component {
   render() {
     // const CustomerEdit = ({ name, ci, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }) => {
     const { name, ci, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }= this.props;
-
+    const { classes } = this.props;
     return (
       <div>
         <h2>Edicion del cliente</h2>
@@ -173,15 +199,16 @@ class CustomerEdit extends Component {
               >Aceptar</button> {/*La accion se va a manejar desde el customer container*/}
               <button type="button" onClick={onBack}
                 disabled={submitting} //Para que deshabilite cancelar cuando ejecuta un proceso de envio de datos al server
-                >Cancelar</button>
-              </CustomersActions>
-              <Prompt
-                //Se va a mostrar cuando haya realizado una modificacion sobre el formulario
-                when={!pristine && !submitSucceeded}   // y no se haya enviado o aceptado los cambios
-                // Tambiens se validara que no este realizandose el submitSucceeded, el cual se realiza cuando
-                //envio correctamente el formulario
-                //si no hubo cambios, no debe mostrar el alert
-                message="Se perderan los datos si continua" />
+                >Cancelar
+              </button>
+          </CustomersActions>
+          <Prompt
+            //Se va a mostrar cuando haya realizado una modificacion sobre el formulario
+            when={!pristine && !submitSucceeded}   // y no se haya enviado o aceptado los cambios
+            // Tambiens se validara que no este realizandose el submitSucceeded, el cual se realiza cuando
+            //envio correctamente el formulario
+            //si no hubo cambios, no debe mostrar el alert
+            message="Se perderan los datos si continua" />
           </form>
         </div>
       );
@@ -209,8 +236,8 @@ const CustomerEditForm = reduxForm({
  })(CustomerEdit);
 // before               (             mapStateToProps               )
 //export default connect((state,props) => ( { initialValues: props }))(CustomerEditForm)
-
-export default setPropsAsInitial(CustomerEditForm); //es equivalente al uso del connect anterior
+const CustomerEditFormWithStyles = withStyles(styles)(CustomerEditForm)
+export default setPropsAsInitial(CustomerEditFormWithStyles); //es equivalente al uso del connect anterior
 
 /* el htmlFor es para indicar que el label trabaja en conjunto con un determinado input
 el type se refiere al tipo de contenido que va a esperar
