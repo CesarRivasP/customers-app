@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import CustomersActions from './customers-actions';
 import '../index.css';
 
+const styles = theme => ({
+  input: {
+    display: 'none',
+  },
+});
 
-const CustomerData = ({ name, id, ci, age, onBack, isDeleteAllow, onDelete }) => {
+const CustomerData = ({ classes, name, id, ci, age, onBack, isDeleteAllow, onDelete }) => {
   return (
     <div>
       <div className="customer-data">
@@ -14,9 +21,23 @@ const CustomerData = ({ name, id, ci, age, onBack, isDeleteAllow, onDelete }) =>
         <div><strong>Edad: </strong><i>{age}</i></div>
       </div>
       <CustomersActions>
-        <button onClick={onBack}>Volver</button>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={onBack}
+          className={classes.button}>
+          Volver
+        </Button>
         {
-          isDeleteAllow && <button onClick={() => onDelete(id)}>Eliminar</button>
+          isDeleteAllow && (
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => onDelete(id)}
+              className={classes.button}>
+              Eliminar
+            </Button>
+          )
         }
       </CustomersActions>
     </div>
@@ -33,4 +54,4 @@ CustomerData.proptypes = {
   onDelete: PropTypes.func,
 }
 
-export default CustomerData;
+export default withStyles(styles)(CustomerData);
