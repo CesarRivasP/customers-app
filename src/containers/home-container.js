@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import AppFrame from '../components/app-frame';
 import CustomerActions from '../components/customers-actions';
 
-
+const styles = theme => ({
+  input: {
+    display: 'none',
+  },
+});
 
 class HomeContainer extends Component {
 
@@ -15,6 +21,7 @@ class HomeContainer extends Component {
   }
 
   render () {
+    const { classes } = this.props;
     return (
       <div>
         {/* <h1>Home</h1>
@@ -26,9 +33,13 @@ class HomeContainer extends Component {
             <div>
               Esta es la pantalla inicial
               <CustomerActions>
-                <button onClick={this.handleOnClick}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={this.handleOnClick}
+                  className={classes.button}>
                   Listado de clientes
-                </button>
+                </Button>
                 {/* <Link to="/customers">Listado de clientes</Link> */}
               </CustomerActions>
             </div>
@@ -39,7 +50,11 @@ class HomeContainer extends Component {
   }
 }
 
-export default withRouter(HomeContainer);
+HomeContainer.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withRouter(withStyles(styles)(HomeContainer));
 /*
 - EL componente link va direccionar hacia la url de customers (donde va a estar el control del listado de clientes)
 - El appFrame nos provee un marco para la visualizacion de la aplicacion
