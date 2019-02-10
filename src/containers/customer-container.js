@@ -16,9 +16,10 @@ import { deleteCustomer } from '../actions/delete-customer';
 class CustomerContainer extends Component {
 
   componentDidMount(){
+    const { customer, fetchCustomers } = this.props;
     // Cuando no existe un customer (el state viene vacio) y por lo tanto este queda en null
-    if(!this.props.customer){
-      this.props.fetchCustomers();
+    if(!customer){
+      fetchCustomers();
     }
   }
 
