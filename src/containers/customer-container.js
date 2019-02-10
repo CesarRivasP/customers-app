@@ -44,18 +44,21 @@ class CustomerContainer extends Component {
   }
 
   handleOnBack = () => {
-    this.props.history.goBack();  // goBack nos permite desplazarnos hacia atras
+    const { history } = this.props;
+    history.goBack();  // goBack nos permite desplazarnos hacia atras
     //similar a ir hacia atras en el navegador
   };
 
   handleOnSubmitSuccess = () => {
-    this.props.history.goBack();  //Para indicar a que ruta se debe devolver
+    const { history } = this.props;
+    history.goBack();  //Para indicar a que ruta se debe devolver
   };
 
   handleOnDelete = (id) => {
-    console.log('handleOnDelete');
-    this.props.deleteCustomer(id)
-      .then((value) => this.props.history.goBack())
+    // console.log('handleOnDelete');
+    const { history, deleteCustomer } = this.props;
+    deleteCustomer(id)
+      .then((value) => history.goBack())
   };
 
   renderCustomerControl = (isEdit, isDelete) => { //El match es un objeto, y eso es lo que viene como parametro
