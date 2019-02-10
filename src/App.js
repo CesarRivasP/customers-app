@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import Header from './components/header';
 import HomeContainer from './containers/home-container';
 import CustomersContainer from './containers/customers-container';
 import CustomerContainer from './containers/customer-container.js';
@@ -20,77 +21,29 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        {/* <div className="App">
-          <Link to="/customers">Customers</Link>
-          <br />
-          <Link to="/customers/25175344">Customers 25.175.344</Link>  example
-        </div> */}
-        {/* { this.renderHome() }
-            { this.renderCustomerContainer() }
-            { this.renderCustomerListContainer() }
-            { this.renderCustomerNewContainer() }
-        */}
-        {/* <div> */}
-          {/*
-            Before<Route exact path="/" component={ this.renderHome } />
-          <Route exact path="/customers" component={ this.renderCustomerContainer } /> */}
-          {/* <Route exact path="/customers/:ci" component={ this.renderCustomerListContainer } /> */}
-
-          {/* Es interpretado como 'willcar' => :ci  => mediante dos puntos y un nombre en particular
-              indica que cualquier url que sea 'custumers/' y concatenado a algo mas voy a tener la tendencia
-              a esta url '/customers/' y lo que venga en ":ci" lo va a tratar como un parametro llamado 'ci'
-
-          */}
-          {/* <Route exact path="/customers/new" component={ this.renderCustomerNewContainer } /> */}
-          {/* After */}
-          {/* <Switch> */}
-            {/* <Route path="/customers/new" component={ this.renderCustomerNewContainer } /> */}
-            {/* la que tiene el willcar no valida por algo en especial, sino que cada cosa que se ubique donde
-              esta el parametro, lo va a tomar como valido */}
-            {/* <Route path="/customers/:ci" component={ this.renderCustomerListContainer } /> */}
-
-            {/* <Route exact path="/customers/new" component={ this.renderCustomerNewContainer } />
-              ruta mas especifica primero */}
-
-            {/* Otra forma de solucionar */}
-            {/* <Switch>
-              Mas especifica
-              <Route path="/customers/new" component={ this.renderCustomerNewContainer } />
-               Willcar
-              <Route path="/customers/:ci" component={ this.renderCustomerListContainer } />
-
-              <Route exact path="/customers" component={ this.renderCustomerContainer } />
-              <Route exact path="/" component={ this.renderHome } />
-          </Switch> */}
-        {/* <div>
-          <Route exact path="/" component={ HomeContainer } />
-          <Route exact path="/customers" component={ CustomersContainer } />
-          <Switch>
-            <Route path="/customers/new" component={ this.renderCustomerNewContainer } />
-            <Route path="/customers/:ci" component={ CustomerContainer } />
-          </Switch>
-        </div> */}
-        <div>
-          <Switch>
-            <Route exact path="/home" component={HomeContainer} />
-            <Route exact path="/">
-              <Redirect to="/home" />
-            </Route>
-            <Route exact path="/customers" component={CustomersContainer} />
-            <Route path="/customers/new" component={NewCustomerContainer} />
-            <Route
-              path="/customers/:ci"
-              render={(props) =>
-                <CustomerContainer
-                  // {...props}
-                  ci={props.match.params.ci} // de estas propiedades, obtener el ci
-                />
-              }
-            />
-          </Switch>
-        </div>
-      </Router>
+      <div>
+        <Header />
+        <Router>
+          <div>
+            <Switch>
+              <Route exact path="/home" component={HomeContainer} />
+              <Route exact path="/">
+                <Redirect to="/home" />
+              </Route>
+              <Route exact path="/customers" component={CustomersContainer} />
+              <Route path="/customers/new" component={NewCustomerContainer} />
+              <Route
+                path="/customers/:ci"
+                render={(props) =>
+                  <CustomerContainer
+                    ci={props.match.params.ci} // de estas propiedades, obtener el ci
+                  />
+                }
+              />
+            </Switch>
+          </div>
+        </Router>
+      </div>
     );
   }
 }
