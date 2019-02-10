@@ -10,6 +10,7 @@ import CustomerEdit from '../components/customer-edit';
 import { getCustomerById } from '../selectors/customers';
 import { fetchCustomers } from '../actions/fetch-customers';
 import { updateCustomer } from '../actions/update-customer';
+import { deleteCustomer } from '../actions/delete-customer';
 
 
 class CustomerContainer extends Component {
@@ -51,8 +52,10 @@ class CustomerContainer extends Component {
     this.props.history.goBack();  //Para indicar a que ruta se debe devolver
   };
 
-  handleOnDelete = () => {
+  handleOnDelete = (id) => {
     console.log('handleOnDelete');
+    this.props.deleteCustomer(id)
+      .then((value) => this.props.history.goBack())
   };
 
   renderCustomerControl = (isEdit, isDelete) => { //El match es un objeto, y eso es lo que viene como parametro
@@ -155,7 +158,8 @@ CustomerContainer.propTypes = {
   customer: PropTypes.object,
   //customer la primera vez que se renderiza esta en null, no es necesario que permanezca como required
   fetchCustomers: PropTypes.func.isRequired,
-  updateCustomer: PropTypes.func.isRequired
+  updateCustomer: PropTypes.func.isRequired,
+  deleteCustomer: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, props) => ({
@@ -163,7 +167,14 @@ const mapStateToProps = (state, props) => ({
   customer: getCustomerById(state, props)
 })
 
-export default withRouter(connect(mapStateToProps, { fetchCustomers, updateCustomer })(CustomerContainer));
+export default withRouter(
+  connect(
+    mapStateToProps, {
+      fetchCustomers,
+      updateCustomer,
+      deleteCustomer
+    })(CustomerContainer)
+  );
 
 /*
 - Usualmente mapStateToProps recibe el state. Tambien puede recibir con props de manera que
