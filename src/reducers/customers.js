@@ -1,7 +1,10 @@
 import { /*handleAction,*/ handleActions } from 'redux-actions';
-import { FETCH_CUSTOMERS } from '../constants';
-import { INSERT_CUSTOMER } from '../constants';
-import { UPDATE_CUSTOMER } from '../constants';
+import {
+  FETCH_CUSTOMERS,
+  INSERT_CUSTOMER,
+  UPDATE_CUSTOMER,
+  DELETE_CUSTOMER
+} from '../constants';
 
 // with handleAction
 // const customers = handleAction(FETCH_CUSTOMERS, (state) => state);
@@ -58,7 +61,12 @@ import { UPDATE_CUSTOMER } from '../constants';
         //Valor inicial = [], de manera que vamos a obtener un array nuevo en base a este array vacio (inicial)
         //en acumulado viene el initialValue ( [] ), y en customer cada uno de los clientes
         return newCustomers;
-      }
+      },
+      [DELETE_CUSTOMER]: (state, action) => state.filter((customer) => customer.id !== action.payload)
+      //al array de los clientes se le aplica un filtro en el que cual se indica que cuando el
+      //id del cliente sea diferente de lo que viene en el payload, lo va a dejar dentro del array
+      //cuando sea igual el id no lo va a poner dentro del array, lo va a filtrar
+      //el resultado va a ser un array donde haya excluido el cliente con el id que venga en el payload
    },
    []
  );
