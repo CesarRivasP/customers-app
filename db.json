@@ -1,10 +1,10 @@
 {
   "customers": [
     {
-      "id": "7546685",
       "ci": "7546685",
-      "name": "Pedro Elias Rivas",
-      "age": 58
+      "name": "Pedro Rivas",
+      "age": 58,
+      "id": "7546685"
     },
     {
       "id": "6855332",
