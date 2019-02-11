@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
 import CustomersListItem from './customer-list-items'
+import { accessControl } from '../helpers/access-control'; //High Order Component
+import { CUSTOMER_LIST } from '../constants/permissions';
 import '../index.css';
 
 const CustomersList = ({customers, urlPath}) => {
@@ -28,4 +29,4 @@ CustomersList.propTypes = {
   urlPath: PropTypes.string.isRequired
 };
 
-export default CustomersList;
+export default accessControl([CUSTOMER_LIST])(CustomersList);
