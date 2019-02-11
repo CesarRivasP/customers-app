@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import CustomersActions from './customers-actions';
+import { accessControl } from '../helpers/access-control'; //High Order Component
+import { CUSTOMER_VIEW } from '../constants/permissions';
 import '../index.css';
 
 const styles = theme => ({
@@ -54,4 +56,5 @@ CustomerData.proptypes = {
   onDelete: PropTypes.func,
 }
 
-export default withStyles(styles)(CustomerData);
+const CustomerDataWithStyles = withStyles(styles)(CustomerData);
+export default accessControl([CUSTOMER_VIEW])(CustomerDataWithStyles);
