@@ -28,7 +28,7 @@ class HomeContainer extends Component {
         <Link to="/customers">Listado de clientes</Link> */}
         {/* Otra manera de hacer esta parte, mediante el app-frame */}
         <AppFrame
-          header="Home"
+          header="Inicio"
           body={  // acciones disponibles
             <div>
               Esta es la pantalla inicial
