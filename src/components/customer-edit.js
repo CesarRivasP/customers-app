@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import CustomersActions from './customers-actions';
 import green from '@material-ui/core/colors/green';
 import { setPropsAsInitial } from '../helpers/set-props-as-initial'; //High Order Component
+import { accessControl } from '../helpers/access-control'; //High Order Component
+import { CUSTOMER_EDIT } from '../constants/permissions';
 import '../index.css';
 
 // const isRequired = (value) => (
@@ -237,8 +239,9 @@ const CustomerEditForm = reduxForm({
 // before               (             mapStateToProps               )
 //export default connect((state,props) => ( { initialValues: props }))(CustomerEditForm)
 const CustomerEditFormWithStyles = withStyles(styles)(CustomerEditForm)
-export default setPropsAsInitial(CustomerEditFormWithStyles); //es equivalente al uso del connect anterior
-
+export default accessControl([CUSTOMER_EDIT])(setPropsAsInitial(CustomerEditFormWithStyles)); //es equivalente al uso del connect anterior
+                      // (permissionsRequire)(WrappepComponent)
+  // PERMISOS QUE REQUIERE PARA VISUALIZARSE
 /* el htmlFor es para indicar que el label trabaja en conjunto con un determinado input
 el type se refiere al tipo de contenido que va a esperar
 - initialValues: props -> props lo mapee a initial values
